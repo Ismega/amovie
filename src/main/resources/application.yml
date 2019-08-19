@@ -1,0 +1,13 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sell?characterEncoding=UTF8&useSSL=false&serverTimezone=UTC&rewriteBatchedStatements=true&allowPublicKeyRetrieval=true
+    password: 1234
+    username: root
+thymeleaf:
+  prefix: classpath:/templates/
+  suffix: .html
+  cache: false
+mybatis:
+  configuration:
+    cache-enabled: false

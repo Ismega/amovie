@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- head -->
+<div th:replace="~{/fragment/common-fragment :: head(登录)}"></div>
+
+<body>
+<div class="wrapper">
+    <!-- Header section -->
+    <div th:replace="~{/fragment/common-fragment :: header}"></div>
+
+    <!-- Main content -->
+    <form class="login" id="login-form" method="post" novalidate="">
+        <p class="login__title">
+            登录 <br/><span class="login-edition">欢迎来到 A.Movie</span>
+        </p>
+
+        <div class="field-wrap">
+            <input
+                    class="login__input"
+                    name="email"
+                    placeholder="邮箱"
+                    type="email"
+            />
+            <input
+                    class="login__input"
+                    name="password"
+                    placeholder="密码"
+                    type="password"
+            />
+
+            <input class="login__check styled" id="#informed" type="checkbox"/>
+            <label class="login__check-info" for="#informed">记住登录状态</label>
+        </div>
+
+        <div class="login__control">
+            <button class="btn btn-md btn--warning btn--wider" type="submit">
+                登录
+            </button>
+            <a class="login__tracker form__tracker" href="#">忘记密码?</a>
+        </div>
+    </form>
+
+    <div class="clearfix"></div>
+</div>
+
+<div th:replace="~{/fragment/common-fragment :: footer}"></div>
+
+<!-- JavaScript-->
+<div th:replace="~{/fragment/common-fragment :: script}"></div>
+</body>
+</html>
