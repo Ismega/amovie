@@ -32,6 +32,10 @@ public interface UserRepository {
     @Select("select * from user where email=#{email}")
     User findByEmail(String email);
 
-    /*@Update("update user set nickname$={nickname},email=${email},")
-    void updateUser(User user);*/
+    @Update("update user set nickname=#{nickname},phone=#{phone},gender=#{gender},role=#{role} where id=#{id}")
+    int updateUser(User user);
+
+    //删除用户
+    @Delete("delete from user where id=#{id}")
+    int deleteById(Integer id);
 }

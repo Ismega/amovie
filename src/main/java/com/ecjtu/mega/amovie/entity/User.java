@@ -31,4 +31,12 @@ public class User {
         this.gender = gender;
         this.role = role;
     }
+
+    public User(Integer id, String nickname, String phone, Integer gender, Integer role) {
+        this.id = id;
+        this.nickname = nickname;
+        this.phone = phone;
+        this.gender = gender;
+        this.role = role;
+    }
 }

@@ -87,20 +87,27 @@
 
         <!-- Additional header buttons / Auth and direct link to booking-->
         <div class="control-panel">
-            <div class="auth auth--home">
+            <div class="auth auth--home" th:each="cookie:${#httpServletRequest.getCookies()}"
+                 th:if="${cookie.getName().equals('email')}">
                 <div class="auth__show">
                 </div>
                 <a class="btn btn--sign btn--singin" href="#">
-                    me
+                    %<span th:text="${session.username}"></span>%
                 </a>
+
                 <ul class="auth__function">
                     <li><a class="auth__function-item" href="/watchlist.html">观看列表</a></li>
                     <li><a class="auth__function-item" href="/ticket.html">已预定的电影票</a></li>
-                    <li><a class="auth__function-item" href="">退出登录</a></li>
+                    <li><a class="auth__function-item" href="/exit">退出登录</a></li>
                 </ul>
             </div>
             <a class="btn btn-md btn--warning btn--book btn-control--home login-window" href="#">预订</a>
         </div>
+        <a class="btn btn-md btn--warning btn--book btn-control--home login-window" href="#">登录</a>
+        <div>
+
+        </div>
+
     </div>
 </header>
 
@@ -146,7 +153,7 @@
     <section class="container">
         <div class="col-sm-4 col-sm-offset-4">
             <button class="overlay-close" type="button">Close</button>
-            <form class="login" id="login-form" method="get" novalidate="">
+            <form action="/login" class="login" id="login-form" method="get" novalidate="">
                 <p class="login__title">登录 <br/>
                     <span class="login-edition">欢迎来到 A.Movie</span>
                 </p>
@@ -167,6 +174,7 @@
 
                     <input
                             class="login__check styled"
+                            name="status"
                             id="#informed"
                             type="checkbox"
                     />

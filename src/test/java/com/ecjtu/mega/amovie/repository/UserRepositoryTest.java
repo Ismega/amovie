@@ -19,7 +19,7 @@ public class UserRepositoryTest {
 
     @Test
     public void save() {
-        User user = new User("mega", "169146", "123456", "cjm", "1877945", 0, 2);
+        User user = new User("肖莉岚", "123456@qq.com", "123456", "cjm", "1877945", 0, 2);
         repository.save(user);
         Assert.assertNotNull(user);
     }
@@ -40,5 +40,17 @@ public class UserRepositoryTest {
     public void findByEmail() {
         User user = repository.findByEmail("169146");
         Assert.assertNotNull(user);
+    }
+
+    @Test
+    public void updateUser() {
+        int result = repository.updateUser(new User(12, "mega2", "18779457989", 0, 1));
+        Assert.assertEquals(1, result);
+
+    }
+
+    @Test
+    public void deleteById() {
+        repository.deleteById(14);
     }
 }

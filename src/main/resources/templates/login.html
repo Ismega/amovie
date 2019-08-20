@@ -9,7 +9,7 @@
     <div th:replace="~{/fragment/common-fragment :: header}"></div>
 
     <!-- Main content -->
-    <form class="login" id="login-form" method="post" novalidate="">
+    <form action="/login" class="login" id="login-form" method="post" novalidate="">
         <p class="login__title">
             登录 <br/><span class="login-edition">欢迎来到 A.Movie</span>
         </p>
@@ -28,7 +28,7 @@
                     type="password"
             />
 
-            <input class="login__check styled" id="#informed" type="checkbox"/>
+            <input class="login__check styled" id="#informed" name="status" type="checkbox"/>
             <label class="login__check-info" for="#informed">记住登录状态</label>
         </div>
 

@@ -13,29 +13,19 @@ import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class UserServiceImplTest {
+public class UserServiceImplTest2 {
 
     @Autowired
     private UserService service;
 
     @Test
-    public void register() {
-        User user = new User("陈佳美", "1691463250@qq.com",
-                "123456", "1234", "1877945", 0, 2);
-        boolean result = service.register(user);
-        Assert.assertEquals(true, result);
+    public void update() {
+        int result = service.update(new User(12, "肖莉岚2", "18779457989", 0, 1));
+        Assert.assertEquals(1, result);
     }
 
     @Test
-    public void login() {
-        User user = service.login("1691463250@qq.com", "123456");
-        Assert.assertNotNull(user);
+    public void delete() {
+        service.delete(15);
     }
-
-    @Test
-    public void isExitUser() {
-        boolean result = service.isExitUser("mega");
-        Assert.assertEquals(true, result);
-    }
-
 }

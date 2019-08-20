@@ -11,12 +11,13 @@ public interface UserService {
     //判断根据id是否查询
     User findById(Integer id);
 
-    //根据昵称查询
-    User findByName(String nickname);
-
     //根据 邮箱登录
     User login(String email, String password);
 
-    //判断用户是否存在
+    //根据 昵称查询,判断用户是否存在
     boolean isExitUser(String nickname);
+
+    int update(User user);
+
+    int delete(Integer id);
 }

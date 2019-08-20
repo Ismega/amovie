@@ -71,9 +71,15 @@ $(function () {
             .hide().delay(300).fadeIn();
 
 
-        var formInput = self.serialize();
-        $.post(self.attr('action'), formInput, function (data) {
-        }); // end post
+        // var formInput = self.serialize();
+        // $.post('login', formInput, function (data) {
+        //     var selectValue='<%=request.getAttribute("success")%>';
+        //     if (selectValue == "成功") {
+        //         alert("成功");
+        //         window.location.href="/";
+        //     }
+        // }); // end post
+
     }); // end submit
 
     $('.login').submit(function (e) {
@@ -100,19 +106,29 @@ $(function () {
             error++;
         }
 
+        var formInput = self.serialize();
+        $.ajax({
+            url: '/login',
+            type: 'POST',
+            data: formInput,
+            dataType: 'json',
+            success: function (data) {
+                alert(data.message)
+                self.children().fadeOut(300, function () {
+                    $(this).remove()
+                });
+                $('<p class="login__title">sign in <br>' +
+                    '<span class="login-edition">welcome to A.Movie</span></p>' +
+                    '<p class="success">You have successfully<br> signed in!</p>').appendTo(self)
+                    .hide().delay(300).fadeIn();
 
-        if (error != 0) return;
-        self.find('[type=submit]').attr('disabled', 'disabled');
-
-        self.children().fadeOut(300, function () {
-            $(this).remove()
+                if (error != 0) return;
+                self.find('[type=submit]').attr('disabled', 'disabled');
+            },
+            error: function (data) {
+                alert(data.responseJSON.message);
+            }
         });
-        $('<p class="login__title">sign in <br><span class="login-edition">welcome to A.Movie</span></p><p class="success">You have successfully<br> signed in!</p>').appendTo(self)
-            .hide().delay(300).fadeIn();
-
-
-        // var formInput = self.serialize();
-        // $.post(self.attr('action'),formInput, function(data){}); // end post
     }); // end submit
 
 
