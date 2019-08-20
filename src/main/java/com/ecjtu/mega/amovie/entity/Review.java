@@ -21,4 +21,11 @@ public class Review {
     private Integer userId;
     //影评创建时间
     private Date createTime;
+
+    public Review(String content, Integer movieId, Integer userId, Date createTime) {
+        this.content = content;
+        this.movieId = movieId;
+        this.userId = userId;
+        this.createTime = createTime;
+    }
 }

@@ -103,7 +103,9 @@ $(function () {
             $pass.removeClass('invalid_field');
         } else {
             createErrTult('Error! Wrong password!', $pass);
-            error++;
+            /*
+
+            ++;*/
         }
 
         var formInput = self.serialize();
@@ -117,11 +119,12 @@ $(function () {
                 self.children().fadeOut(300, function () {
                     $(this).remove()
                 });
-                $('<p class="login__title">sign in <br>' +
+                /*$('<p class="login__title">sign in <br>' +
                     '<span class="login-edition">welcome to A.Movie</span></p>' +
                     '<p class="success">You have successfully<br> signed in!</p>').appendTo(self)
                     .hide().delay(300).fadeIn();
-
+*/
+                window.location.href = "/";
                 if (error != 0) return;
                 self.find('[type=submit]').attr('disabled', 'disabled');
             },

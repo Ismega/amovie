@@ -21,5 +21,24 @@ public class Order {
     private Integer ticketNum;
     private Integer totalPrice;
     //当前用户预定的座位号
-    private String bookedSeated;
+    private String seat;
+
+    public Order(Integer status, Integer userId, Date createTime,
+                 Integer sceneId, Integer ticketNum, Integer totalPrice, String seat) {
+        this.status = status;
+        this.userId = userId;
+        this.createTime = createTime;
+        this.sceneId = sceneId;
+        this.ticketNum = ticketNum;
+        this.totalPrice = totalPrice;
+        this.seat = seat;
+    }
+
+    public Order(Integer status, Integer sceneId, Integer ticketNum, Integer totalPrice, String seat) {
+        this.status = status;
+        this.sceneId = sceneId;
+        this.ticketNum = ticketNum;
+        this.totalPrice = totalPrice;
+        this.seat = seat;
+    }
 }

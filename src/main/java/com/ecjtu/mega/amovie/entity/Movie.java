@@ -9,6 +9,9 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+/**
+ * 电影详情
+ */
 public class Movie {
 
     private Integer id;
@@ -18,9 +21,9 @@ public class Movie {
     private String directors;
     private String actors;
     //电影上映日期
-    private Date releaseTime;
+    private String releaseTime;
     //电影类型
-    private Integer categoryId;
+    private String categoryIds;
     //电影上映状态，0为已上映，1为未上映
     private Integer status;
     //剧情
@@ -28,4 +31,34 @@ public class Movie {
     //电影海报
     private String poster;
     private String country;
+
+    public Movie(String name, String duration,
+                 String directors, String actors,
+                 String releaseTime, String categoryIds,
+                 Integer status, String plot, String country) {
+        this.name = name;
+        this.duration = duration;
+        this.directors = directors;
+        this.actors = actors;
+        this.releaseTime = releaseTime;
+        this.categoryIds = categoryIds;
+        this.status = status;
+        this.plot = plot;
+        this.country = country;
+    }
+
+    public Movie(Integer id, String name, String duration,
+                 String directors, String actors, String releaseTime,
+                 String categoryIds, Integer status, String plot, String country) {
+        this.id = id;
+        this.name = name;
+        this.duration = duration;
+        this.directors = directors;
+        this.actors = actors;
+        this.releaseTime = releaseTime;
+        this.categoryIds = categoryIds;
+        this.status = status;
+        this.plot = plot;
+        this.country = country;
+    }
 }

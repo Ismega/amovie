@@ -38,4 +38,15 @@ public class UserServiceImplTest {
         Assert.assertEquals(true, result);
     }
 
+    @Test
+    public void update() {
+        int result = service.update(new User(12, "肖莉岚2", "18779457989", 0, 1));
+        Assert.assertEquals(1, result);
+    }
+
+    @Test
+    public void delete() {
+        service.delete(15);
+    }
+
 }

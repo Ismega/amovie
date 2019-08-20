@@ -10,6 +10,9 @@ import java.util.Date;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+/**
+ * 场次
+ */
 public class Scene {
 
     //场次id
@@ -18,6 +21,7 @@ public class Scene {
     private String movieName;
     private Integer price;
     private Integer seatNum = 166;
+    //场次时间
     private Date showtime;
-    private Integer bookedSeat;
+    private String bookedSeat;
 }

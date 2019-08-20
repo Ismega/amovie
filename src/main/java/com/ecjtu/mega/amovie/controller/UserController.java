@@ -21,7 +21,6 @@ public class UserController {
     private UserService service;
 
     @RequestMapping("/index")
-
     public String index() {
         return "index";
     }
@@ -36,8 +35,8 @@ public class UserController {
         User user = service.login(email, password);
         Map<String, Object> map = new HashMap<>();
         if (user != null) {
+            session.setAttribute("user", user);
             if (status.equals("on")) {
-                session.setAttribute("username", user.getNickname());
                 response.addCookie(new Cookie("email", email));
             }
             map.put("message", "登录成功");

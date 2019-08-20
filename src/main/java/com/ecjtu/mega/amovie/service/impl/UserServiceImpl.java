@@ -15,6 +15,12 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private UserRepository repository;
 
+    /**
+     * 判断用户是否注册
+     *
+     * @param user
+     * @return
+     */
     @Override
     public boolean register(User user) {
         String salt = MD5Utils.getSalt();
@@ -33,6 +39,12 @@ public class UserServiceImpl implements UserService {
         return false;
     }
 
+    /**
+     * 用户登录
+     * @param email
+     * @param password
+     * @return
+     */
     @Override
     public User login(String email, String password) {
         User user = repository.findByEmail(email);
@@ -46,22 +58,42 @@ public class UserServiceImpl implements UserService {
         return null;
     }
 
+    /**
+     * 判断用户是否存在
+     * @param nickname
+     * @return
+     */
     @Override
     public boolean isExitUser(String nickname) {
         User user = repository.findByUserName(nickname);
         return user != null;
     }
 
+    /**
+     * 修改用户信息
+     * @param user
+     * @return
+     */
     @Override
     public int update(User user) {
         return repository.updateUser(user);
     }
 
+    /**
+     * 删除用户
+     * @param id
+     * @return
+     */
     @Override
     public int delete(Integer id) {
         return repository.deleteById(id);
     }
 
+    /**
+     * 根据id查询用户
+     * @param id
+     * @return
+     */
     @Override
     public User findById(Integer id) {
         return repository.findById(id);

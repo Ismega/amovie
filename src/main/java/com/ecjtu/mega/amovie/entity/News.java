@@ -18,4 +18,9 @@ public class News {
     //资讯内容
     private String content;
     private Date createTime;
+
+    public News(String content, Date createTime) {
+        this.content = content;
+        this.createTime = createTime;
+    }
 }
