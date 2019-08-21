@@ -33,4 +33,9 @@ public class NewServiceImpl implements NewService {
     public int save(News news) {
         return repository.save(news);
     }
+
+    @Override
+    public News findById(Integer id) {
+        return repository.findById(id);
+    }
 }

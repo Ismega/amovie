@@ -43,7 +43,7 @@ public class NewsRepositoryTest {
 
     @Test
     public void update() {
-        News news = new News(2, "8月17日零点刚过，燃爆2019的国漫代表作《哪吒之魔童降世》票房正式突破40亿大关！该片也成为了中国影史第四部票房超40亿的作品。\n" +
+        News news = new News(4, "6月17日零点刚过，燃爆2019的国漫代表作《哪吒之魔童降世》票房正式突破40亿大关！该片也成为了中国影史第四部票房超40亿的作品。\n" +
                 "据猫眼专业版数据预测，《哪吒》的最终票房将达到46.84亿。如能实现，《哪吒》超过《复仇者联盟4：终局之战》（42.4亿）跻身中国影史票房前三甲指日可待。",
                 new Date());
         int res = repository.update(news);

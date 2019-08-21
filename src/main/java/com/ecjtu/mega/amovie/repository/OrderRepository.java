@@ -16,7 +16,7 @@ public interface OrderRepository {
     int add(Order order);
 
     //修改订单
-    @Update("update `order` set status=#{status},scene_id=#{sceneId},ticket_num=#{ticketNum},total_price=#{totalPrice},seat=#{seat}")
+    @Update("update `order` set status=#{status},scene_id=#{sceneId},ticket_num=#{ticketNum},total_price=#{totalPrice},seat=#{seat} where id=#{id}")
     int update(Order order);
 
     //根据id 查询订单

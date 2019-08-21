@@ -23,7 +23,7 @@ public class Movie {
     //电影上映日期
     private String releaseTime;
     //电影类型
-    private String categoryIds;
+    private String categoryId;
     //电影上映状态，0为已上映，1为未上映
     private Integer status;
     //剧情
@@ -34,14 +34,14 @@ public class Movie {
 
     public Movie(String name, String duration,
                  String directors, String actors,
-                 String releaseTime, String categoryIds,
+                 String releaseTime, String categoryId,
                  Integer status, String plot, String country) {
         this.name = name;
         this.duration = duration;
         this.directors = directors;
         this.actors = actors;
         this.releaseTime = releaseTime;
-        this.categoryIds = categoryIds;
+        this.categoryId = categoryId;
         this.status = status;
         this.plot = plot;
         this.country = country;
@@ -49,14 +49,14 @@ public class Movie {
 
     public Movie(Integer id, String name, String duration,
                  String directors, String actors, String releaseTime,
-                 String categoryIds, Integer status, String plot, String country) {
+                 String categoryId, Integer status, String plot, String country) {
         this.id = id;
         this.name = name;
         this.duration = duration;
         this.directors = directors;
         this.actors = actors;
         this.releaseTime = releaseTime;
-        this.categoryIds = categoryIds;
+        this.categoryId = categoryId;
         this.status = status;
         this.plot = plot;
         this.country = country;

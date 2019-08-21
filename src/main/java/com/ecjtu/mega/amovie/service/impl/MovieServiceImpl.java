@@ -67,4 +67,15 @@ public class MovieServiceImpl implements MovieService {
     public int delete(Integer id) {
         return repository.delete(id);
     }
+
+    /**
+     * 根据id查询电影
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public Movie findById(Integer id) {
+        return repository.findById(id);
+    }
 }

@@ -20,4 +20,7 @@ public interface MovieService {
 
     //删除电影信息
     int delete(Integer id);
+
+    //根据id查询
+    Movie findById(Integer id);
 }

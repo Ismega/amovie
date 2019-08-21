@@ -18,4 +18,6 @@ public interface NewService {
     //添加资讯
     int save(News news);
 
+    //根据id查询资讯
+    News findById(Integer id);
 }

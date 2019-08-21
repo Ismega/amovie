@@ -3,6 +3,7 @@ package com.ecjtu.mega.amovie.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -22,6 +23,16 @@ public class Scene {
     private Integer price;
     private Integer seatNum = 166;
     //场次时间
-    private Date showtime;
+    private String showtime;
     private String bookedSeat;
+
+    public Scene(Integer movieId, String movieName, Integer price,
+                 Integer seatNum, String showtime, String bookedSeat) {
+        this.movieId = movieId;
+        this.movieName = movieName;
+        this.price = price;
+        this.seatNum = seatNum;
+        this.showtime = showtime;
+        this.bookedSeat = bookedSeat;
+    }
 }

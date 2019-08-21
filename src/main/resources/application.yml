@@ -11,3 +11,9 @@ thymeleaf:
 mybatis:
   configuration:
     cache-enabled: false
+    map-underscore-to-camel-case: true
+pagehelper:
+  helperDialect: mysql
+  reasonable: true
+  supportMethodsArguments: true
+  params: count=countSql

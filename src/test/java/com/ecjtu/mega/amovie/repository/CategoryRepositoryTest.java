@@ -27,20 +27,20 @@ public class CategoryRepositoryTest {
 
     @Test
     public void findById() {
-        Category category = repository.findById("1");
+        Category category = repository.findById(1);
         Assert.assertNotNull(category);
     }
 
     @Test
     public void save() {
-        Category category = new Category("6", "动漫");
+        Category category = new Category("动漫");
         int res = repository.save(category);
         Assert.assertEquals(1, res);
     }
 
     @Test
     public void delete() {
-        int res = repository.delete("4");
+        int res = repository.delete(4);
         Assert.assertEquals(1, res);
     }
 }

@@ -22,7 +22,7 @@ public class CategoryServiceImplTest {
 
     @Test
     public void save() {
-        Category category = new Category("8", "恐怖");
+        Category category = new Category("恐怖");
         int res = service.save(category);
         Assert.assertEquals(1, res);
     }
@@ -35,14 +35,14 @@ public class CategoryServiceImplTest {
 
     @Test
     public void findById() {
-        Category category = service.findById("1");
+        Category category = service.findById(1);
         Assert.assertNotNull(category);
 
     }
 
     @Test
     public void delete() {
-        int res = service.delete("7");
+        int res = service.delete(7);
         Assert.assertEquals(1, res);
     }
 }

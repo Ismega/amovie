@@ -7,11 +7,11 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 
 @ControllerAdvice
-public class CommonExceptionHandler {
+public class NotFoundExceptionHandler {
 
-    @ExceptionHandler(value = CommonException.class)
-    public ResponseEntity getException(CommonException common) {
-//        System.err.println(common.getMessage()+"66666");
-        return new ResponseEntity(CommonCode.error(common.getMessage()), HttpStatus.BAD_REQUEST);
+    @ExceptionHandler(value = NotFoundException.class)
+    public ResponseEntity getException(NotFoundException e) {
+
+        return new ResponseEntity(CommonCode.error(e.getMessage()), HttpStatus.NOT_FOUND);
     }
 }

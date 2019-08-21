@@ -13,7 +13,11 @@ import lombok.NoArgsConstructor;
  */
 public class Category {
 
-    private String id;
+    private Integer id;
     //影评类型名称
     private String name;
+
+    public Category(String name) {
+        this.name = name;
+    }
 }

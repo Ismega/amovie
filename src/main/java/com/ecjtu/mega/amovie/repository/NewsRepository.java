@@ -22,7 +22,7 @@ public interface NewsRepository {
     @Insert("insert into news (content,create_time) values(#{content},#{createTime})")
     int save(News news);
 
-    @Update("update news set content=#{content},create_time=#{createTime}")
+    @Update("update news set content=#{content},create_time=#{createTime} where id=#{id}")
     int update(News news);
 
     @Delete("delete from news where id=#{id}")

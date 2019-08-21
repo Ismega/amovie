@@ -25,12 +25,17 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public Category findById(String id) {
+    public Category findById(Integer id) {
         return repository.findById(id);
     }
 
     @Override
-    public int delete(String id) {
+    public int delete(Integer id) {
         return repository.delete(id);
+    }
+
+    @Override
+    public int update(Category category) {
+        return repository.update(category);
     }
 }

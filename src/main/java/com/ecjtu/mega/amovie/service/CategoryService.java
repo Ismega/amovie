@@ -13,8 +13,11 @@ public interface CategoryService {
     List<Category> findAll();
 
     //根据id查询电影类型
-    Category findById(String id);
+    Category findById(Integer id);
 
     //删除电影类型
-    int delete(String id);
+    int delete(Integer id);
+
+    //修改电影类别
+    int update(Category category);
 }

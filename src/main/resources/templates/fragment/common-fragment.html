@@ -93,18 +93,19 @@
             <div class="auth auth--home" th:each="cookie:${#httpServletRequest.getCookies()}"
                  th:unless="${session.user == null}"
                  th:if="${cookie.getName().equals('email')}">
-
                 <div class="auth__show">
                 </div>
                 <a class="btn btn--sign btn--singin" href="#">
                     <span th:text="${session.user.nickname}"></span>
                 </a>
-
                 <ul class="auth__function">
                     <li><a class="auth__function-item" href="/watchlist.html">观看列表</a></li>
                     <li><a class="auth__function-item" href="/ticket.html">已预定的电影票</a></li>
                     <li><a class="auth__function-item" href="/exit">退出登录</a></li>
                 </ul>
+            </div>
+            <div th:if="${session.user != null}">
+                <a class="btn btn-md btn--warning btn--book btn-control--home" href="/book1">预定</a>
             </div>
 
         </div>
