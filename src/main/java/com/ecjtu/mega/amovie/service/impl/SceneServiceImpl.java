@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author mega
+ */
 @Service
 public class SceneServiceImpl implements SceneService {
 

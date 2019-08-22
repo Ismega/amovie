@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ecjtu.mega.amovie.repository.MovieRepository">
+    <update id="update" parameterType="Movie">
+        UPDATE `movie`
+        <set>
+            <if test="name != null">`name` = #{name},</if>
+            <if test="duration != null">duration = #{duration},</if>
+            <if test="directors != null">directors = #{directors},</if>
+            <if test="actors != null">actors = #{actors},</if>
+            <if test="releaseTime != null">release_time = #{releaseTime},</if>
+            <if test="plot != null">plot = #{plot},</if>
+            <if test="poster != null">poster = #{poster},</if>
+            <if test="country != null">country = #{country},</if>
+            <if test="status != null">status = #{status}</if>
+        </set>
+        WHERE id = #{id}
+    </update>
+
+    <resultMap id="findMovieAndCategory" type="Movie">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="duration" column="duration"/>
+        <result property="directors" column="directors"/>
+        <result property="actors" column="actors"/>
+        <result property="releaseTime" column="release_time"/>
+        <result property="plot" column="plot"/>
+        <result property="poster" column="poster"/>
+        <result property="country" column="country"/>
+        <result property="status" column="status"/>
+        <collection property="categories" column="id" ofType="Category" select="selectCategories">
+            <id property="id" column="catId"/>
+            <result property="name" column="catName"/>
+        </collection>
+    </resultMap>
+
+    <select id="selectCategories" parameterType="int" resultType="Category">
+        SELECT category.* FROM relation LEFT JOIN category
+        ON category.id=relation.category_id WHERE movie_id=#{id};
+    </select>
+
+    <select id="findAll" resultMap="findMovieAndCategory">
+        select * from movie
+    </select>
+
+    <select id="findById" resultMap="findMovieAndCategory" parameterType="int">
+        select * from movie where id=#{id}
+    </select>
+
+    <select id="findByMovieName" resultMap="findMovieAndCategory" parameterType="String">
+        SELECT movie.*,category.id catId,category.`name` catName
+        FROM movie LEFT JOIN relation ON movie.id=relation.movie_id
+        LEFT JOIN category ON category.id=relation.category_id
+        WHERE movie.`name` LIKE concat("%",#{name},"%")
+    </select>
+
+    <select id="findByCategoryId" resultMap="findMovieAndCategory" parameterType="int">
+        SELECT movie.*,category.id catId,category.`name` catName
+        FROM movie LEFT JOIN relation ON movie.id=relation.movie_id
+        LEFT JOIN category ON category.id=relation.category_id
+        WHERE movie.id IN(
+        SELECT relation.movie_id FROM relation WHERE relation.category_id=#{categoryId})
+    </select>
+
+</mapper>

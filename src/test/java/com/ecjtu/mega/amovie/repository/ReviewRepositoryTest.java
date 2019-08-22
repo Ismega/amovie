@@ -50,7 +50,7 @@ public class ReviewRepositoryTest {
 
     @Test
     public void update() {
-        Review review = new Review(2, "电影差评", 2, 11, new Date());
+        Review review = new Review(5, "电影一般", 2, 11, new Date());
         int result = repository.update(review);
         Assert.assertEquals(1, result);
     }

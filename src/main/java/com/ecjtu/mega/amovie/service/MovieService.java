@@ -4,23 +4,63 @@ import com.ecjtu.mega.amovie.entity.Movie;
 
 import java.util.List;
 
+/**
+ * @author mega
+ */
 public interface MovieService {
 
-    //显示所有电影信息
+    /**
+     * 显示所有电影信息
+     *
+     * @return
+     */
     List<Movie> showAll();
 
-    //根据电影名称查询
-    Movie findByName(String name);
+    /**
+     * 根据电影名称查询
+     *
+     * @param name
+     * @return
+     */
+    List<Movie> findByName(String name);
 
-    //添加电影信息
+    /**
+     * 添加电影信息
+     *
+     * @param movie
+     * @return
+     */
     int save(Movie movie);
 
-    //修改电影信息
+    /**
+     * 修改电影信息
+     *
+     * @param movie
+     * @return
+     */
     int update(Movie movie);
 
-    //删除电影信息
+    /**
+     * 删除电影信息
+     *
+     * @param id
+     * @return
+     */
     int delete(Integer id);
 
-    //根据id查询
+    /**
+     * 根据id查询
+     *
+     * @param id
+     * @return
+     */
     Movie findById(Integer id);
+
+    /**
+     * 根据类型id查询电影
+     *
+     * @param id
+     * @return
+     */
+    List<Movie> findByCategoryId(Integer id);
 }

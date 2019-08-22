@@ -3,6 +3,9 @@ package com.ecjtu.mega.amovie.controller;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+/**
+ * @author mega
+ */
 @Controller
 public class RootController {
 

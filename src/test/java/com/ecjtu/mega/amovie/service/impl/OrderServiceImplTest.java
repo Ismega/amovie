@@ -35,7 +35,7 @@ public class OrderServiceImplTest {
 
     @Test
     public void save() {
-        Order order = new Order(1, 2, new Date(), 2,
+        Order order = new Order(1, 2, new Date(), 10,
                 4, 80, "[A1,A2,A3,A4]");
         int res = service.save(order);
         Assert.assertEquals(1, res);

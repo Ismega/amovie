@@ -13,9 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+/**
+ * @author mega
+ */
 @RestController
 @RequestMapping("/categories")
-//类别
+/**
+ * 类别
+ */
 public class CategoryController {
 
     @Autowired

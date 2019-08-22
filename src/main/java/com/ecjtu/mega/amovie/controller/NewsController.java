@@ -13,9 +13,14 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 
+/**
+ * @author mega
+ */
 @RestController
 @RequestMapping("/news")
-//资讯
+/**
+ * 资讯
+ */
 public class NewsController {
 
     @Autowired

@@ -6,6 +6,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 
+/**
+ * @author mega
+ */
 @Data
 @Builder
 @NoArgsConstructor
@@ -16,7 +19,9 @@ public class User {
     private String nickname;
     private String email;
     private String password;
-    //加盐
+    /**
+     * 加盐
+     */
     private String salt;
     private String phone;
     private Integer gender;

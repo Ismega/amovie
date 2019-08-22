@@ -2,6 +2,9 @@ package com.ecjtu.mega.amovie.utils;
 
 import com.ecjtu.mega.amovie.entity.Result;
 
+/**
+ * @author mega
+ */
 public class ResultUtils {
 
     public static Result success() {

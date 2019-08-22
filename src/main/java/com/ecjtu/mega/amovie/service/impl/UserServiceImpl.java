@@ -9,6 +9,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
+/**
+ * @author mega
+ */
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -41,6 +44,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 用户登录
+     *
      * @param email
      * @param password
      * @return
@@ -60,6 +64,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 判断用户是否存在
+     *
      * @param nickname
      * @return
      */
@@ -71,6 +76,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 修改用户信息
+     *
      * @param user
      * @return
      */
@@ -81,6 +87,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 删除用户
+     *
      * @param id
      * @return
      */
@@ -91,6 +98,7 @@ public class UserServiceImpl implements UserService {
 
     /**
      * 根据id查询用户
+     *
      * @param id
      * @return
      */

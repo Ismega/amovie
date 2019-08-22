@@ -3,11 +3,11 @@ package com.ecjtu.mega.amovie.entity;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import java.util.Date;
 
 
+/**
+ * @author mega
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -16,13 +16,17 @@ import java.util.Date;
  */
 public class Scene {
 
-    //场次id
+    /**
+     * 场次id
+     */
     private Integer id;
     private Integer movieId;
     private String movieName;
     private Integer price;
     private Integer seatNum = 166;
-    //场次时间
+    /**
+     * 场次时间
+     */
     private String showtime;
     private String bookedSeat;
 

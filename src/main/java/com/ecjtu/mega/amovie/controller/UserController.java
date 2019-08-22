@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 import java.util.HashMap;
 import java.util.Map;
 
+/**
+ * @author mega
+ */
 @Controller
 public class UserController {
 
@@ -36,7 +39,7 @@ public class UserController {
         Map<String, Object> map = new HashMap<>();
         if (user != null) {
             session.setAttribute("user", user);
-            if (status.equals("on")) {
+            if ("on".equals(status)) {
                 response.addCookie(new Cookie("email", email));
             }
             map.put("message", "登录成功");

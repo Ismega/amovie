@@ -5,6 +5,7 @@ import com.ecjtu.mega.amovie.entity.Movie;
 import com.ecjtu.mega.amovie.exception.CommonException;
 import com.ecjtu.mega.amovie.exception.NotFoundException;
 import com.ecjtu.mega.amovie.form.MovieForm;
+import com.ecjtu.mega.amovie.service.CategoryService;
 import com.ecjtu.mega.amovie.service.MovieService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
@@ -14,12 +15,19 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
+/**
+ * @author mega
+ */
 @RestController
 @RequestMapping("/movies")
 public class MovieController {
 
     @Autowired
     private MovieService service;
+    @Autowired
+    private CategoryService categoryService;
 
     /**
      * 获取电影列表
@@ -30,10 +38,10 @@ public class MovieController {
      */
     @GetMapping
     public ResponseEntity getAll(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                 @RequestParam(value = "size", required = false, defaultValue = "4") Integer size) {
+                                 @RequestParam(value = "size", required = false, defaultValue = "3") Integer size) {
 
         Page<Movie> movies = PageHelper.startPage(page, size).doSelectPage(() -> service.showAll());
-        return new ResponseEntity(movies, HttpStatus.OK);
+        return new ResponseEntity(movies.toPageInfo(), HttpStatus.OK);
     }
 
     /**
@@ -61,22 +69,15 @@ public class MovieController {
     public ResponseEntity insert(@RequestBody MovieForm movieForm) {
 
         //MovieForm对象
-        Integer[] ids = movieForm.getCategoryIds();
-//        System.out.println(Arrays.toString(ids));
-        StringBuilder sb = new StringBuilder();
-        for (Integer str : ids) {
-            sb.append(str);
-            sb.append(",");
-        }
-        String string = sb.toString();
-        string = string.substring(0, string.length() - 1);
-        Movie movie = new Movie();
-        //MovieForm转换成Movie对象了
-        BeanUtils.copyProperties(movieForm, movie);
-        movie.setCategoryId(string);
-        int result = service.save(movie);
-        if (result != 0) {
-            return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
+        Integer[] categoryIds = movieForm.getCategoryIds();
+        if (categoryIds != null) {
+            Movie movie = new Movie();
+            //MovieForm转换成Movie对象了
+            BeanUtils.copyProperties(movieForm, movie);
+            int result = categoryService.insertRelation(movie, categoryIds);
+            if (result != 0) {
+                return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
+            }
         }
         throw new CommonException("增加失败");
     }
@@ -93,26 +94,20 @@ public class MovieController {
                                  @RequestBody MovieForm movieForm) {
         Movie movie1 = service.findById(id);
         if (movie1 != null) {
-            Integer[] ids = movieForm.getCategoryIds();
-            StringBuilder sb = new StringBuilder();
-            for (Integer str : ids) {
-                sb.append(str);
-                sb.append(",");
+            Integer[] categoryIds = movieForm.getCategoryIds();
+            if (categoryIds != null) {
+                Movie movie = new Movie();
+                //MovieForm转换成Movie对象了
+                BeanUtils.copyProperties(movieForm, movie);
+                movie.setId(id);
+                int result = categoryService.updateRelation(movie, categoryIds);
+                if (result != 0) {
+                    return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
+                }
+                return ResponseEntity.badRequest().build();
             }
-            String string = sb.toString();
-            string = string.substring(0, string.length() - 1);
-            Movie movie = new Movie();
-            BeanUtils.copyProperties(movieForm, movie);
-            movie.setCategoryId(string);
-            int res = service.update(movie);
-            if (res != 0) {
-                return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
-            }
-            throw new CommonException("修改失败");
         }
         throw new NotFoundException("资源未找到");
-
-
     }
 
     /**
@@ -125,12 +120,26 @@ public class MovieController {
     public ResponseEntity delete(@PathVariable(value = "id") Integer id) {
         Movie movie = service.findById(id);
         if (movie != null) {
-            int res = service.delete(id);
+            int res = categoryService.deleteRelation(id);
             if (res != 0) {
                 return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
             }
-            throw new CommonException("删除失败");
         }
         throw new NotFoundException("资源未找到");
+    }
+
+    /**
+     * 根据类型id查询电影
+     *
+     * @param id
+     * @return
+     */
+    @GetMapping("/category/{id}")
+    public ResponseEntity findByCategoryId(@PathVariable(value = "id") Integer id) {
+        List<Movie> movies = service.findByCategoryId(id);
+        if (movies != null) {
+            return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
+        }
+        throw new NotFoundException("查询失败");
     }
 }

@@ -1,18 +1,22 @@
 package com.ecjtu.mega.amovie.controller;
 
 import com.ecjtu.mega.amovie.constant.CommonCode;
-import com.ecjtu.mega.amovie.entity.Movie;
 import com.ecjtu.mega.amovie.entity.Scene;
 import com.ecjtu.mega.amovie.exception.CommonException;
 import com.ecjtu.mega.amovie.exception.NotFoundException;
+import com.ecjtu.mega.amovie.form.SceneForm;
 import com.ecjtu.mega.amovie.service.SceneService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+/**
+ * @author mega
+ */
 @RestController
 @RequestMapping("/scenes")
 public class SceneController {
@@ -52,11 +56,16 @@ public class SceneController {
     /**
      * 插入数据
      *
-     * @param scene
+     * @param sceneForm
      * @return
      */
     @PostMapping
-    public ResponseEntity insert(@RequestBody Scene scene) {
+    public ResponseEntity insert(@RequestBody SceneForm sceneForm) {
+        String[] seats = sceneForm.getBookedSeat();
+        String seat = String.join(",", seats);
+        Scene scene = new Scene();
+        BeanUtils.copyProperties(sceneForm, scene);
+        scene.setBookedSeat(seat);
         int result = service.save(scene);
         if (result < 1) {
             throw new CommonException("插入失败");
@@ -68,14 +77,21 @@ public class SceneController {
      * 更新
      *
      * @param id
-     * @param scene
+     * @param sceneForm
      * @return
      */
     @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable(value = "id") Integer id,
-                                 @RequestBody Scene scene) {
+                                 @RequestBody SceneForm sceneForm) {
         Scene scene1 = service.findById(id);
         if (scene1 != null) {
+
+            String[] seats = sceneForm.getBookedSeat();
+            String seat = String.join(",", seats);
+
+            Scene scene = new Scene();
+            BeanUtils.copyProperties(sceneForm, scene);
+            scene.setBookedSeat(seat);
             scene.setId(id);
             int res = service.update(scene);
             if (res != 0) {

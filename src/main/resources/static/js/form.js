@@ -96,16 +96,13 @@ $(function () {
 
         if (!emailRegex.test($email.val())) {
             createErrTult("Error! Wrong email!", $email);
-            error++;
+            // error++;
         }
 
         if ($pass.val().length > 1 && $pass.val() != $pass.attr('placeholder')) {
             $pass.removeClass('invalid_field');
         } else {
             createErrTult('Error! Wrong password!', $pass);
-            /*
-
-            ++;*/
         }
 
         var formInput = self.serialize();

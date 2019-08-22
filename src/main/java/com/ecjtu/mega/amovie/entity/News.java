@@ -15,7 +15,9 @@ import java.util.Date;
 public class News {
 
     private Integer id;
-    //资讯内容
+    /**
+     * 资讯内容
+     */
     private String content;
     private Date createTime;
 

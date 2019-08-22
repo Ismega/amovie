@@ -1,40 +1,77 @@
 package com.ecjtu.mega.amovie.repository;
 
 import com.ecjtu.mega.amovie.entity.Movie;
-import org.apache.ibatis.annotations.*;
+import org.apache.ibatis.annotations.Delete;
+import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Options;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 
+/**
+ * @author mega
+ */
 @Mapper
 @Repository
 public interface MovieRepository {
 
-    //查询所有电影详情
-    @Select("select * from movie")
+    /**
+     * 查询所有电影详情
+     *
+     * @return
+     */
     List<Movie> findAll();
 
-    //根据id查询电影
-    @Select("select * from movie where id=#{id}")
+    /**
+     * 根据id查询电影
+     *
+     * @param id
+     * @return
+     */
     Movie findById(Integer id);
 
-    //根据电影名字查询电影
-    @Select("select * from movie where name=#{name}")
-    Movie findByMovieName(String name);
+    /**
+     * 根据电影名字查询电影
+     *
+     * @param name
+     * @return
+     */
+    List<Movie> findByMovieName(String name);
 
-    //根据电影id修改电影信息
-    @Update("update movie set name=#{name},duration=#{duration},directors=#{directors}," +
-            "actors=#{actors},release_time=#{releaseTime},category_id=#{categoryId}," +
-            "status=#{status},plot=#{plot},poster=#{poster},country=#{country} where id=#{id}")
+    /**
+     * 根据电影id修改电影信息
+     *
+     * @param movie
+     * @return
+     */
     int update(Movie movie);
 
-    //根据电影id删除电影信息
+    /**
+     * 根据电影id删除电影信息
+     *
+     * @param id
+     * @return
+     */
     @Delete("delete from movie where id=#{id}")
     int delete(Integer id);
 
-    //保存电影信息
-    @Insert("insert into movie (name,duration,directors,actors,release_time,category_id,status,plot,country) " +
-            "values(#{name},#{duration},#{directors},#{actors},#{releaseTime},#{categoryId},#{status},#{plot},#{country})")
+    /**
+     * 保存电影信息
+     *
+     * @param movie
+     * @return
+     */
+    @Insert("insert into movie (name,duration,directors,actors,release_time,status,plot,country) " +
+            "values(#{name},#{duration},#{directors},#{actors},#{releaseTime},#{status},#{plot},#{country})")
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int save(Movie movie);
 
+    /**
+     * 根据类别查询电影
+     *
+     * @param categoryId
+     * @return
+     */
+    List<Movie> findByCategoryId(Integer categoryId);
 }

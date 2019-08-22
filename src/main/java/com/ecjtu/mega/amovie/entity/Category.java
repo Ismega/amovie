@@ -4,7 +4,9 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-
+/**
+ * @author mega
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -14,7 +16,9 @@ import lombok.NoArgsConstructor;
 public class Category {
 
     private Integer id;
-    //影评类型名称
+    /**
+     * 影评类型名称
+     */
     private String name;
 
     public Category(String name) {

@@ -12,6 +12,8 @@ mybatis:
   configuration:
     cache-enabled: false
     map-underscore-to-camel-case: true
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.ecjtu.mega.amovie.entity
 pagehelper:
   helperDialect: mysql
   reasonable: true

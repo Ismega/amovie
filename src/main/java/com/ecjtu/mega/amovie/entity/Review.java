@@ -6,6 +6,9 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
+/**
+ * @author mega
+ */
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -15,11 +18,9 @@ import java.util.Date;
 public class Review {
 
     private Integer id;
-    //影评内容
     private String content;
     private Integer movieId;
     private Integer userId;
-    //影评创建时间
     private Date createTime;
 
     public Review(String content, Integer movieId, Integer userId, Date createTime) {

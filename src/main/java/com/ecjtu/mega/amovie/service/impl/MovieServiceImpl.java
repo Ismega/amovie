@@ -8,6 +8,9 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 
+/**
+ * @author mega
+ */
 @Service
 public class MovieServiceImpl implements MovieService {
 
@@ -31,7 +34,7 @@ public class MovieServiceImpl implements MovieService {
      * @return
      */
     @Override
-    public Movie findByName(String name) {
+    public List<Movie> findByName(String name) {
         return repository.findByMovieName(name);
     }
 
@@ -77,5 +80,16 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Movie findById(Integer id) {
         return repository.findById(id);
+    }
+
+    /**
+     * 根据类型id查询电影
+     *
+     * @param id
+     * @return
+     */
+    @Override
+    public List<Movie> findByCategoryId(Integer id) {
+        return repository.findByCategoryId(id);
     }
 }
