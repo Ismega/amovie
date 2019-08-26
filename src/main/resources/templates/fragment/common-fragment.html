@@ -158,7 +158,7 @@
     <section class="container">
         <div class="col-sm-4 col-sm-offset-4">
             <button class="overlay-close" type="button">Close</button>
-            <form action="/login" class="login" id="login-form" method="get" novalidate="">
+            <form class="login" id="login-form" method="post" novalidate="">
                 <p class="login__title">登录 <br/>
                     <span class="login-edition">欢迎来到 A.Movie</span>
                 </p>
@@ -177,20 +177,12 @@
                             type="password"
                     />
 
-                    <input
-                            class="login__check styled"
-                            name="status"
-                            id="#informed"
-                            type="checkbox"
-                    />
-                    <label class="login__check-info" for="#informed">记住登录状态</label>
                 </div>
 
                 <div class="login__control">
                     <button class="btn btn-md btn--warning btn--wider" type="submit">
                         登录
                     </button>
-                    <a class="login__tracker form__tracker" href="#">忘记密码?</a>
                 </div>
             </form>
         </div>

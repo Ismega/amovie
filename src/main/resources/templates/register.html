@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <!-- head -->
-<div th:replace="~{/fragment/common-fragment :: head(登录)}"></div>
+<div th:replace="~{/fragment/common-fragment :: head(注册)}"></div>
 
 <body>
 <div class="wrapper">
@@ -9,7 +9,7 @@
     <div th:replace="~{/fragment/common-fragment :: header}"></div>
 
     <!-- Main content -->
-    <form action="/register" class="login" id="login-form" method="post" novalidate="">
+    <form class="login" id="register-form" method="post" novalidate="">
         <p class="login__title">
             欢迎来到 A.Movie,请注册 <br/>
             <!--<span class="login-edition"></span>-->
@@ -18,7 +18,7 @@
         <div class="field-wrap">
             <input
                     class="login__input"
-                    name="name"
+                    name="nickname"
                     placeholder="用户名"
                     type="text"
             />
@@ -32,24 +32,18 @@
 
             <input
                     class="login__input"
-                    name="onfirmpPassword"
-                    placeholder="确认密码"
-                    type="password"
-            />
-            <input
-                    class="login__input"
                     name="email"
                     placeholder="邮箱"
                     type="email"
             />
             <input
                     class="login__input"
-                    name="tel"
+                    name="phone"
                     placeholder="电话号码"
                     type="tel"
             />    
 
-            <select class="login__input" name="gender" placeholder="性别" style="color: #440307">
+            <select class="login__input" name="gender" placeholder="性别" style="color: #440307" type="gender">
                   
                 <option value="0">请选择性别</option>
                       

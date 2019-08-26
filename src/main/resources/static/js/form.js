@@ -82,7 +82,7 @@ $(function () {
 
     }); // end submit
 
-    $('.login').submit(function (e) {
+    $('#login-form').submit(function (e) {
 
         e.preventDefault();
         var error = 0;
@@ -112,25 +112,84 @@ $(function () {
             data: formInput,
             dataType: 'json',
             success: function (data) {
+                console.log(data);
                 alert(data.message)
                 self.children().fadeOut(300, function () {
                     $(this).remove()
                 });
-                /*$('<p class="login__title">sign in <br>' +
-                    '<span class="login-edition">welcome to A.Movie</span></p>' +
-                    '<p class="success">You have successfully<br> signed in!</p>').appendTo(self)
-                    .hide().delay(300).fadeIn();
-*/
+
                 window.location.href = "/";
                 if (error != 0) return;
                 self.find('[type=submit]').attr('disabled', 'disabled');
             },
             error: function (data) {
+                console.log(data);
                 alert(data.responseJSON.message);
             }
         });
     }); // end submit
 
+
+    $('#register-form').submit(function (e) {
+        e.preventDefault();
+        var error = 0;
+        var self = $(this);
+
+        var $name = self.find('[type=text]');
+        var $pass = self.find('[type=password]');
+        var $email = self.find('[type=email]');
+        var $tel = self.find('[type=tel]');
+        var $gender = self.find('[type=gender]');
+
+        /*if ($name.val() == "") {
+            createErrTult('Error! Wrong username!', $name);
+        }
+
+        var emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+        if (!emailRegex.test($email.val())) {
+            createErrTult("Error! Wrong email!", $email);
+        }
+
+        if ($pass.val().length > 1 && $pass.val() != $pass.attr('placeholder')) {
+            $pass.removeClass('invalid_field');
+        } else {
+            createErrTult('Error! Wrong password!', $pass);
+        }
+        var telRegex = /^1([38]\d|5[0-35-9]|7[3678])\d{8}$/;
+        if (!telRegex.test($tel.val())) {
+            createErrTult("Error! Wrong telephone!", $email);
+        }*/
+        var data = {
+            nickname: $name.val(),
+            password: $pass.val(),
+            phone: $tel.val(),
+            email: $email.val(),
+            gender: $gender.val(),
+        };
+        console.log($gender.val(), $name.val(), $tel.val(), $email.val(), $pass.val());
+        $.ajax({
+            url: '/register',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+
+            success: function (data) {
+                alert(data.message)
+                self.children().fadeOut(300, function () {
+                    $(this).remove()
+                });
+
+                window.location.href = "/login";
+                if (error != 0) return;
+                self.find('[type=submit]').attr('disabled', 'disabled');
+            },
+            error: function (data) {
+                alert(data.message);
+            }
+        });
+
+    });
 
     function createErrTult(text, $elem) {
         $elem.focus();

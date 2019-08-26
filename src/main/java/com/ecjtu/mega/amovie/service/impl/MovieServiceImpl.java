@@ -1,16 +1,20 @@
 package com.ecjtu.mega.amovie.service.impl;
 
 import com.ecjtu.mega.amovie.entity.Movie;
+import com.ecjtu.mega.amovie.exception.CommonException;
+import com.ecjtu.mega.amovie.exception.NotFoundException;
 import com.ecjtu.mega.amovie.repository.MovieRepository;
 import com.ecjtu.mega.amovie.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 /**
  * @author mega
  */
+@Transactional(rollbackFor = {CommonException.class, NotFoundException.class})
 @Service
 public class MovieServiceImpl implements MovieService {
 

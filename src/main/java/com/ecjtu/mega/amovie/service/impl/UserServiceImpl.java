@@ -1,12 +1,10 @@
 package com.ecjtu.mega.amovie.service.impl;
 
 import com.ecjtu.mega.amovie.entity.User;
-import com.ecjtu.mega.amovie.exception.CommonException;
 import com.ecjtu.mega.amovie.repository.UserRepository;
 import com.ecjtu.mega.amovie.service.UserService;
 import com.ecjtu.mega.amovie.utils.MD5Utils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DuplicateKeyException;
 import org.springframework.stereotype.Service;
 
 /**
@@ -26,19 +24,19 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean register(User user) {
-        String salt = MD5Utils.getSalt();
-        String encryptPassword = MD5Utils.md5(user.getPassword(), salt);
-        user.setSalt(salt);
-        user.setPassword(encryptPassword);
-        try {
-            int result = repository.save(user);
-            if (result != 0) {
-                return true;
+        User user1 = repository.findByEmail(user.getEmail());
+        if (user1 == null) {
+            if (user.getEmail() != null) {
+                String salt = MD5Utils.getSalt();
+                String encryptPassword = MD5Utils.md5(user.getPassword(), salt);
+                user.setSalt(salt);
+                user.setPassword(encryptPassword);
+                int result = repository.save(user);
+                if (result != 0) {
+                    return true;
+                }
             }
-        } catch (DuplicateKeyException e) {
-            throw new CommonException("邮箱已存在");
         }
-
         return false;
     }
 
