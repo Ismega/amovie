@@ -96,4 +96,9 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> findByCategoryId(Integer id) {
         return repository.findByCategoryId(id);
     }
+
+    @Override
+    public List<Movie> findByStatus(Integer status) {
+        return repository.findByStatus(status);
+    }
 }

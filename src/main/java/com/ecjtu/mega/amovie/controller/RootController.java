@@ -29,7 +29,7 @@ public class RootController {
         return "new";
     }
 
-    @RequestMapping("/rate.")
+    @RequestMapping("/rate")
     public String rate() {
         return "rate";
     }
@@ -58,4 +58,32 @@ public class RootController {
     public String bookfinal() {
         return "book-final";
     }
+
+    @RequestMapping("/movie")
+    public String movie() {
+        return "movie";
+    }
+
+/*    @RequestMapping("/movie-list")
+    public String movieList() {
+        return "movie-list";
+    }*/
+
+    @RequestMapping("/news-list")
+    public String newsList() {
+        return "news-list";
+    }
+
+    /**
+     * 观看列表
+     *
+     * @return
+     */
+    @RequestMapping("/watchlist")
+    public String watchlist() {
+        return "watchlist";
+    }
+
+
+
 }

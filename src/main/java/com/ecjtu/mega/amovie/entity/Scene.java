@@ -39,4 +39,10 @@ public class Scene {
         this.showtime = showtime;
         this.bookedSeat = bookedSeat;
     }
+
+    public Scene(Integer movieId, Integer price, String showtime) {
+        this.movieId = movieId;
+        this.price = price;
+        this.showtime = showtime;
+    }
 }

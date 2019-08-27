@@ -1,4 +1,4 @@
-package com.ecjtu.mega.amovie.controller;
+package com.ecjtu.mega.amovie.controller.admin;
 
 import com.ecjtu.mega.amovie.constant.CommonCode;
 import com.ecjtu.mega.amovie.entity.Category;
@@ -13,16 +13,19 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 
 /**
  * @author mega
  */
-@Controller
-@RequestMapping("/categories")
+@RestController
+@RequestMapping("/api/categories")
+@CrossOrigin
 /**
  * 类别
  */
-public class CategoryController {
+public class AdminCategoryController {
 
     @Autowired
     private CategoryService service;
@@ -36,9 +39,20 @@ public class CategoryController {
      */
     @GetMapping
     public ResponseEntity getCategory(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                      @RequestParam(value = "size", required = false, defaultValue = "3") Integer size) {
+                                      @RequestParam(value = "size", required = false, defaultValue = "20") Integer size) {
         Page<Category> categories = PageHelper.startPage(page, size).doSelectPage(() -> service.findAll());
         return new ResponseEntity(categories.toPageInfo(), HttpStatus.OK);
+    }
+
+    /**
+     * 获取所有类别，不分页
+     *
+     * @return
+     */
+    @GetMapping("/all")
+    public ResponseEntity getAll() {
+        List<Category> categories = service.findAll();
+        return new ResponseEntity(categories, HttpStatus.OK);
     }
 
     /**

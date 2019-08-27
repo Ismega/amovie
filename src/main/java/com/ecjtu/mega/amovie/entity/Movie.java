@@ -27,7 +27,7 @@ public class Movie {
      */
     private String releaseTime;
     /**
-     * 电影上映状态，0为已上映，1为未上映
+     * 电影上映状态，1为已上映，0为未上映
      */
     private Integer status;
     /**

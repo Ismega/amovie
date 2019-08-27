@@ -166,7 +166,7 @@ $(function () {
             email: $email.val(),
             gender: $gender.val(),
         };
-        console.log($gender.val(), $name.val(), $tel.val(), $email.val(), $pass.val());
+        // console.log($gender.val(), $name.val(), $tel.val(), $email.val(), $pass.val());
         $.ajax({
             url: '/register',
             method: 'POST',

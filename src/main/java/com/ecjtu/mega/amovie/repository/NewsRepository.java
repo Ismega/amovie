@@ -36,7 +36,7 @@ public interface NewsRepository {
      * @param news
      * @return
      */
-    @Insert("insert into news (content,create_time) values(#{content},#{createTime})")
+    @Insert("insert into news (content,create_time,title) values(#{content},#{createTime},#{title})")
     int save(News news);
 
     /**
@@ -45,7 +45,7 @@ public interface NewsRepository {
      * @param news
      * @return
      */
-    @Update("update news set content=#{content},create_time=#{createTime} where id=#{id}")
+    @Update("update news set content=#{content},create_time=#{createTime},title=#{title} where id=#{id}")
     int update(News news);
 
     /**

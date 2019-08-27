@@ -20,9 +20,11 @@ public class News {
      */
     private String content;
     private Date createTime;
+    private String title;
 
-    public News(String content, Date createTime) {
+    public News(String content, Date createTime, String title) {
         this.content = content;
         this.createTime = createTime;
+        this.title = title;
     }
 }

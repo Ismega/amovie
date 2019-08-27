@@ -63,4 +63,11 @@ public interface MovieService {
      * @return
      */
     List<Movie> findByCategoryId(Integer id);
+
+    /**
+     * 根据上映状态查询电影
+     *
+     * @return
+     */
+    List<Movie> findByStatus(Integer status);
 }

@@ -1,4 +1,4 @@
-package com.ecjtu.mega.amovie.controller;
+package com.ecjtu.mega.amovie.controller.admin;
 
 import com.ecjtu.mega.amovie.entity.User;
 import com.ecjtu.mega.amovie.form.UserForm;
@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Controller;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,8 +19,10 @@ import java.util.Map;
 /**
  * @author mega
  */
-@Controller
-public class UserController {
+@RestController
+@CrossOrigin
+@RequestMapping("/api/users")
+public class AdminUserController {
 
     @Autowired
     private UserService service;
@@ -31,6 +32,14 @@ public class UserController {
         return "index";
     }
 
+    /**
+     * 用户登录
+     *
+     * @param email
+     * @param password
+     * @param session
+     * @return
+     */
     @PostMapping("/login")
     @ResponseBody
     public ResponseEntity login(@RequestParam("email") String email,
@@ -48,7 +57,13 @@ public class UserController {
         }
     }
 
-    //,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
+    /**
+     * 用户注册
+     *
+     * @param userForm
+     * @param bindingResult
+     * @return
+     */
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity register(@RequestBody @Valid UserForm userForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -68,6 +83,12 @@ public class UserController {
         }
     }
 
+    /**
+     * 退出登录
+     *
+     * @param session
+     * @return
+     */
     @GetMapping("/exit")
     public String exit(HttpSession session) {
         session.invalidate();

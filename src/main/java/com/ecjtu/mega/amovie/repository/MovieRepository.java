@@ -1,10 +1,7 @@
 package com.ecjtu.mega.amovie.repository;
 
 import com.ecjtu.mega.amovie.entity.Movie;
-import org.apache.ibatis.annotations.Delete;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -74,4 +71,13 @@ public interface MovieRepository {
      * @return
      */
     List<Movie> findByCategoryId(Integer categoryId);
+
+    /**
+     * 根据状态查询电影
+     *
+     * @param status
+     * @return
+     */
+    @Select("select * from movie where status=#{status}")
+    List<Movie> findByStatus(Integer status);
 }

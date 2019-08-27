@@ -58,7 +58,7 @@ public class CategoryServiceImpl implements CategoryService {
         int result = movieRepository.save(movie);
         if (result != 0) {
             for (Integer categoryId : categoryIds) {
-                repository.insertRelation(movie.getId(), categoryId);
+                return repository.insertRelation(movie.getId(), categoryId);
             }
         }
         return 0;
