@@ -24,9 +24,9 @@ public class RootController {
         return "404";
     }
 
-    @RequestMapping("/new")
+    @RequestMapping("/news")
     public String news() {
-        return "new";
+        return "news";
     }
 
     @RequestMapping("/rate")
@@ -64,21 +64,6 @@ public class RootController {
         return "movie";
     }
 
-/*    @RequestMapping("/movie-list")
-    public String movieList() {
-        return "movie-list";
-    }*/
-
-    @RequestMapping("/news-list")
-    public String newsList() {
-        return "news-list";
-    }
-
-    /**
-     * 观看列表
-     *
-     * @return
-     */
     @RequestMapping("/watchlist")
     public String watchlist() {
         return "watchlist";

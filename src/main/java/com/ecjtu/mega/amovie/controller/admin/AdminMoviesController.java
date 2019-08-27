@@ -96,7 +96,8 @@ public class AdminMoviesController {
         Integer[] categoryIds = movieForm.getCategoryIds();
         if (categoryIds != null) {
             Movie movie = new Movie();
-            movie.setName(movieForm.getMovieName());
+            movie.setName(movieForm.getName());
+            System.out.println(movie.getName());
             //MovieForm转换成Movie对象了
             BeanUtils.copyProperties(movieForm, movie);
             int result = categoryService.insertRelation(movie, categoryIds);

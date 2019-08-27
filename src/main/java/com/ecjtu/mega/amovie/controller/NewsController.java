@@ -1,8 +1,6 @@
 package com.ecjtu.mega.amovie.controller;
 
-import com.ecjtu.mega.amovie.constant.CommonCode;
 import com.ecjtu.mega.amovie.entity.News;
-import com.ecjtu.mega.amovie.exception.CommonException;
 import com.ecjtu.mega.amovie.exception.NotFoundException;
 import com.ecjtu.mega.amovie.service.NewService;
 import com.github.pagehelper.Page;
@@ -11,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 
@@ -18,7 +17,7 @@ import org.springframework.web.bind.annotation.*;
  * @author mega
  */
 @Controller
-@RequestMapping("/news")
+@RequestMapping("/newsList")
 /**
  * 资讯
  */
@@ -28,17 +27,19 @@ public class NewsController {
     private NewService service;
 
     /**
-     * 获取所有资讯内容
+     * 获取所有资讯内容  分页
      *
      * @param page
      * @param size
      * @return
      */
     @GetMapping()
-    public ResponseEntity getAll(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                                 @RequestParam(value = "size", required = false, defaultValue = "4") Integer size) {
-        Page<News> news = PageHelper.startPage(page, size).doSelectPage(() -> service.showAll());
-        return new ResponseEntity(news.toPageInfo(), HttpStatus.OK);
+    public String getAll(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                         @RequestParam(value = "size", required = false, defaultValue = "1") Integer size,
+                         Model model) {
+        Page<News> newsPage = PageHelper.startPage(page, size).doSelectPage(() -> service.showAll());
+        model.addAttribute("newsPage", newsPage);
+        return "news-list";
     }
 
     /**
@@ -62,14 +63,14 @@ public class NewsController {
      * @param news
      * @return
      */
-    @PostMapping
+   /* @PostMapping
     public ResponseEntity insert(@RequestBody News news) {
         int result = service.save(news);
         if (result != 0) {
             return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
         }
         throw new CommonException("增加失败");
-    }
+    }*/
 
     /**
      * 修改资讯
@@ -78,7 +79,7 @@ public class NewsController {
      * @param news
      * @return
      */
-    @PutMapping("/{id}")
+   /* @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable(value = "id") Integer id,
                                  @RequestBody News news) {
         News news1 = service.findById(id);
@@ -91,7 +92,7 @@ public class NewsController {
             throw new CommonException("修改失败");
         }
         throw new NotFoundException("资源未找到");
-    }
+    }*/
 
     /**
      * 删除资讯
@@ -99,7 +100,7 @@ public class NewsController {
      * @param id
      * @return
      */
-    @DeleteMapping("/{id}")
+    /*@DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable(value = "id") Integer id) {
         News news = service.findById(id);
         if (news != null) {
@@ -110,5 +111,5 @@ public class NewsController {
             throw new CommonException("删除失败");
         }
         throw new NotFoundException("资源未找到");
-    }
+    }*/
 }

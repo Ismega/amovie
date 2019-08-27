@@ -43,7 +43,6 @@ public interface ReviewRepository {
     int delete(Integer id);
 
     /**
-     * #{}里面是review对象的值，movie_id=#{movieId}，前半段是sql语句，后半段是变量
      *
      * @param review
      * @return

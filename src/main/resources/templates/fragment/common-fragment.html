@@ -49,8 +49,8 @@
 <header class="header-wrapper" th:fragment="header">
     <div class="container">
         <!-- Logo link-->
-        <a class="logo" href="/index">
-            <img alt="logo" src="images/logo.png"/>
+        <a class="logo" href="/">
+            <img alt="logo" src="/images/logo.png"/>
         </a>
 
         <!-- Main website navigation-->
@@ -80,7 +80,7 @@
                 </li>
                 <li>
                     <span class="sub-nav-toggle plus"></span>
-                    <a href="/news-list">资讯</a>
+                    <a href="/newsList">资讯</a>
                 </li>
             </ul>
         </nav>
@@ -89,10 +89,10 @@
         <div class="control-panel">
             <span th:if="${session.user == null}">
                 <a class="btn btn-md btn--warning btn--book btn-control--home login-window" href="#">登录</a>
+                <a class="btn btn-md btn--warning btn--book btn-control--home" href="/register">注册</a>
             </span>
-            <div class="auth auth--home" th:each="cookie:${#httpServletRequest.getCookies()}"
-                 th:unless="${session.user == null}"
-                 th:if="${cookie.getName().equals('email')}">
+
+            <div class="auth auth--home" th:if="${session.user != null}">
                 <div class="auth__show">
                 </div>
                 <a class="btn btn--sign btn--singin" href="#">
@@ -105,7 +105,7 @@
                 </ul>
             </div>
             <div th:if="${session.user != null}">
-                <a class="btn btn-md btn--warning btn--book btn-control--home" href="/book1">预定</a>
+                <a class="btn btn-md btn--warning btn--book btn-control--home" href="/movies">预定</a>
             </div>
 
         </div>
@@ -123,7 +123,7 @@
             <ul class="nav-link">
                 <li><a class="nav-link__item" href="/movie-list">电影</a></li>
                 <li><a class="nav-link__item" href="/rate">评分</a></li>
-                <li><a class="nav-link__item" href="/news-list">资讯</a></li>
+                <li><a class="nav-link__item" href="/newsList">资讯</a></li>
             </ul>
         </div>
         <div class="col-xs-4 col-md-2 footer-nav">

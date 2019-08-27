@@ -26,8 +26,6 @@ public class ReviewServiceImpl implements ReviewService {
      */
     @Override
     public int publish(Review review) {
-        Date date = new Date();
-        review.setCreateTime(date);
         return repository.save(review);
 
     }

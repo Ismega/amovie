@@ -140,9 +140,9 @@ function init_Home() {
     $('.score').raty({
         width: 130,
         score: 0,
-        path: 'images/rate/',
+        path: '/images/rate/',
         starOff: 'star-off.svg',
-        starOn: 'star-on.svg'
+        starOn: ''
     });
 
     //5. Scroll down navigation function
@@ -753,7 +753,7 @@ function init_MovieList() {
         half: true,
         readOnly: true,
         noRatedMsg: '您还没评分！',
-        path: 'images/rate/',
+        path: '/images/rate/',
         starOff: 'star-off.svg',
         starOn: 'star-on.svg'
     });
@@ -805,7 +805,7 @@ function init_MoviePage() {
     $('.score').raty({
         width: 130,
         score: 5,
-        path: 'images/rate/',
+        path: '/images/rate/',
         starOff: 'star-off.svg',
         starOn: 'star-on.svg'
     });
@@ -834,6 +834,39 @@ function init_MoviePage() {
                             <textarea class='comment-form__text' placeholder='发表您的评论吧'></textarea>\
                             <button type='submit' class='btn btn-md btn--danger comment-form__btn'>发表评论</button>\
                         </form>");
+
+    });
+
+    $('.comment-form__btn').click(function (e) {
+        e.preventDefault();
+        var movieId = $('#form-movieId').val();
+        var content = $('.comment-form__text').val();
+        var userId = $('#form-userId').val();
+        var data = {
+            movieId: movieId,
+            content: content,
+            userId: userId,
+        };
+        $.ajax({
+            url: '/api/reviews',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            success: function (e) {
+                // console.log(e);
+                window.location.href = '/movies/' + movieId;
+
+            },
+            statusCode: {
+                200: function () {
+                    alert("成功");
+                },
+                400: function () {
+                    alert("失败");
+                }
+            }
+        })
     });
 
     //7. Timetable active element
@@ -858,9 +891,9 @@ function init_Rates() {
     $('.score').raty({
         width: 130,
         score: 0,
-        path: 'images/rate/',
+        path: '/images/rate/',
         starOff: 'star-off.svg',
-        starOn: 'star-on.svg'
+        starOn: ''
     });
 
     //After rate callback

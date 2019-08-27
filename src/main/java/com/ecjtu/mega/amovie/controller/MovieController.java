@@ -2,11 +2,15 @@ package com.ecjtu.mega.amovie.controller;
 
 import com.ecjtu.mega.amovie.constant.CommonCode;
 import com.ecjtu.mega.amovie.entity.Movie;
+import com.ecjtu.mega.amovie.entity.Review;
+import com.ecjtu.mega.amovie.entity.User;
 import com.ecjtu.mega.amovie.exception.CommonException;
 import com.ecjtu.mega.amovie.exception.NotFoundException;
 import com.ecjtu.mega.amovie.form.MovieForm;
 import com.ecjtu.mega.amovie.service.CategoryService;
 import com.ecjtu.mega.amovie.service.MovieService;
+import com.ecjtu.mega.amovie.service.ReviewService;
+import com.ecjtu.mega.amovie.service.UserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import org.springframework.beans.BeanUtils;
@@ -30,6 +34,10 @@ public class MovieController {
     private MovieService service;
     @Autowired
     private CategoryService categoryService;
+    @Autowired
+    private ReviewService reviewService;
+    @Autowired
+    private UserService userService;
 
     /**
      * 获取电影列表
@@ -38,8 +46,6 @@ public class MovieController {
      * @param size
      * @return
      */
-
-
     @GetMapping
     public String getAll(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                          @RequestParam(value = "size", required = false, defaultValue = "5") Integer size,
@@ -57,12 +63,25 @@ public class MovieController {
      * @return
      */
     @GetMapping("/{id}")
-    public ResponseEntity getById(@PathVariable(value = "id") Integer id) {
+    public String getById(@PathVariable(value = "id") Integer id,
+                          Model model) {
         Movie movie = service.findById(id);
         if (movie != null) {
-            return new ResponseEntity(movie, HttpStatus.OK);
+            List<Review> reviews = reviewService.findByMovieId(movie.getId());
+            if (reviews != null) {
+                for (Review review : reviews) {
+                    User user = userService.findById(review.getUserId());
+                    if (user != null) {
+                        review.setNickname(user.getNickname());
+                    }
+                }
+                model.addAttribute("reviewList", reviews);
+                model.addAttribute("movie", movie);
+                return "movie";
+            }
+
         }
-        throw new NotFoundException("资源未找到");
+        return null;
     }
 
     /**
@@ -78,7 +97,7 @@ public class MovieController {
         Integer[] categoryIds = movieForm.getCategoryIds();
         if (categoryIds != null) {
             Movie movie = new Movie();
-            movie.setName(movieForm.getMovieName());
+            movie.setName(movieForm.getName());
             //MovieForm转换成Movie对象了
             BeanUtils.copyProperties(movieForm, movie);
             int result = categoryService.insertRelation(movie, categoryIds);

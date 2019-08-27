@@ -59,8 +59,8 @@ public interface MovieRepository {
      * @param movie
      * @return
      */
-    @Insert("insert into movie (name,duration,directors,actors,release_time,status,plot,country) " +
-            "values(#{name},#{duration},#{directors},#{actors},#{releaseTime},#{status},#{plot},#{country})")
+    @Insert("insert into movie (name,duration,directors,actors,release_time,status,plot,poster,country) " +
+            "values(#{name},#{duration},#{directors},#{actors},#{releaseTime},#{status},#{plot},#{poster},#{country})")
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     int save(Movie movie);
 

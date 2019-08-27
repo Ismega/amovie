@@ -384,78 +384,20 @@
             <h2 class="page-heading">最新资讯</h2>
 
             <!-- start -->
-            <div class="col-sm-4 similar-wrap col--remove">
+
+            <div class="col-sm-4 similar-wrap col--remove" th:each="news:${newsList}">
                 <div class="post post--preview post--preview--wide">
                     <div class="post__image">
                         <img alt="" src="http://placehold.it/270x330"/>
                     </div>
-                    <p class="post__date">22 October 2013</p>
-                    <a class="post__title" href="news.html">"Thor: The Dark World" - World Premiere</a>
-                    <a class="btn read-more post--btn" href="news.html">了解更多</a>
+                    <p class="post__date" th:text="${news.getCreateTime()}"></p>
+                    <a class="post__title" href="news.html" th:text="${news.getTitle()}"></a>
+                    <a class="btn read-more post--btn" href="/news">了解更多</a>
                 </div>
             </div>
+
             <!-- end -->
 
-            <div class="col-sm-4 similar-wrap col--remove">
-                <div class="post post--preview post--preview--wide">
-                    <div class="post__image">
-                        <img alt="" src="http://placehold.it/270x330"/>
-                        <div class="social social--position social--hide">
-                            <span class="social__name">Share:</span>
-                            <a
-                                    class="social__variant social--first fa fa-facebook"
-                                    href="#"
-                            ></a>
-                            <a
-                                    class="social__variant social--second fa fa-twitter"
-                                    href="#"
-                            ></a>
-                            <a
-                                    class="social__variant social--third fa fa-vk"
-                                    href="#"
-                            ></a>
-                        </div>
-                    </div>
-                    <p class="post__date">22 October 2013</p>
-                    <a class="post__title" href="single-page-left.html"
-                    >30th Annual Night Of Stars Presented By The Fashion Group
-                        International</a
-                    >
-                    <a class="btn read-more post--btn" href="single-page-left.html"
-                    >read more</a
-                    >
-                </div>
-            </div>
-
-            <div class="col-sm-4 similar-wrap col--remove">
-                <div class="post post--preview post--preview--wide">
-                    <div class="post__image">
-                        <img alt="" src="http://placehold.it/270x330"/>
-                        <div class="social social--position social--hide">
-                            <span class="social__name">Share:</span>
-                            <a
-                                    class="social__variant social--first fa fa-facebook"
-                                    href="#"
-                            ></a>
-                            <a
-                                    class="social__variant social--second fa fa-twitter"
-                                    href="#"
-                            ></a>
-                            <a
-                                    class="social__variant social--third fa fa-vk"
-                                    href="#"
-                            ></a>
-                        </div>
-                    </div>
-                    <p class="post__date">22 October 2013</p>
-                    <a class="post__title" href="single-page-left.html"
-                    >Hollywood Film Awards 2013</a
-                    >
-                    <a class="btn read-more post--btn" href="single-page-left.html"
-                    >read more</a
-                    >
-                </div>
-            </div>
         </div>
     </section>
 

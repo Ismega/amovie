@@ -16,7 +16,8 @@ public class MovieForm {
 
     private Integer id;
 
-    private String movieName;
+
+    private String name;
     /**
      * 电影时长
      */
