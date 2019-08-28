@@ -39,4 +39,6 @@ public interface ReviewService {
      * @return
      */
     List<Review> findByMovieId(Integer movieId);
+
+    int findCount(Integer movieId);
 }

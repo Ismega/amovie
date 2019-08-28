@@ -80,4 +80,7 @@ public interface MovieRepository {
      */
     @Select("select * from movie where status=#{status}")
     List<Movie> findByStatus(Integer status);
+
+    @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
+    List<Movie> findMovieByUserId(Integer userId);
 }

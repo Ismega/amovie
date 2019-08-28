@@ -54,5 +54,5 @@ public interface SceneService {
      * @param movieId
      * @return
      */
-    int findByMovieId(Integer movieId);
+    List<Scene> findByMovieId(Integer movieId);
 }

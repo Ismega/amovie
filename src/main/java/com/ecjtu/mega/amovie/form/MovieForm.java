@@ -1,10 +1,12 @@
 package com.ecjtu.mega.amovie.form;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.validation.constraints.NotBlank;
+import java.util.Date;
 
 /**
  * @author mega
@@ -27,7 +29,9 @@ public class MovieForm {
     private String directors;
     @NotBlank(message = "演员不能为空")
     private String actors;
-    private String releaseTime;
+
+    @JsonProperty("releaseDate")
+    private Date releaseTime;
 
     private Integer[] categoryIds;
     /**

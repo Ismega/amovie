@@ -13,19 +13,19 @@
     <!-- Search bar -->
     <div class="search-wrapper">
         <div class="container container--add">
-            <form class="search" id="search-form" method="get">
-                <input class="search__field" placeholder="Search" type="text"/>
+            <form class="search" id="search-form" method="post">
+                <input class="search__field" name="search" placeholder="Search" type="text"/>
                 <select
                         class="search__sort"
                         id="search-sort"
                         name="sorting_item"
                         tabindex="0"
                 >
-                    <option selected="selected" value="1">By title</option>
-                    <option value="2">By year</option>
-                    <option value="3">By producer</option>
-                    <option value="4">By title</option>
-                    <option value="5">By year</option>
+                    <option name="byMovieName" selected="selected" value="1">By movieName</option>
+                    <option name="byActor" value="2">By actor</option>
+                    <option name="bydirector" value="3">By director</option>
+                    <option name="bycategory" value="4">By category</option>
+                    <option name="byYear" value="5">By year</option>
                 </select>
                 <button class="btn btn-md btn--danger search__button" type="submit">
                     search a movie
@@ -118,15 +118,13 @@
                         </div>
                         <!-- 评论数 -->
                         <div class="movie__feature">
-                            <a class="movie__feature-item movie__feature--comment" href="#">123</a>
+                            <a class="movie__feature-item movie__feature--comment" href="#" th:text="${count}">123</a>
                         </div>
                     </div>
 
                     <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
                         <a class="movie__title link--huge" th:href="'/movies/'+${movie.getId()}"
-                           th:text="${movie.getName()}"
-                        ></a
-                        >
+                           th:text="${movie.getName()}"></a>
 
                         <p class="movie__time" th:text="${movie.getDuration()}">103min</p>
 
@@ -146,13 +144,19 @@
                         <p class="movie__option">
                             <strong>Actors: </strong><a href="#" th:text="${movie.getActors()}"></a>,
                         </p>
-                        <p class="movie__option">
-                            <strong>Age restriction: </strong><a href="#">13</a>
-                        </p>
+
 
                         <div class="movie__btns">
-                            <a class="btn btn-md btn--warning" href="#">预订此电影</a>
-                            <a class="watchlist" href="#">添加到播放列表</a>
+                            <a class="btn btn-md btn--warning" href="/movies">预订此电影</a>
+
+                            <div th:unless="${session.user == null}">
+                                <input hidden id="watchlist-userId" name="userId" th:value="${session.user.getId()}">
+                            </div>
+                            <input hidden id="watchlistMovieId" name="movieId" th:value="${movie.getId()}">
+
+                            <a class="watchlist" th:onclick="|add(${movie.getId()})|">添加到播放列表</a>
+                            <!--th:href="@{/watch(userId=${session.user.getId()},movieId=${movie.getId()})}"-->
+
                         </div>
 
                         <div class="preview-footer">

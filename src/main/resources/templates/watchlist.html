@@ -13,10 +13,10 @@
         <div class="col-sm-12">
 
             <!-- Movie preview item -->
-            <div class="movie movie--preview movie--full release">
+            <div class="movie movie--preview movie--full release" th:each="movie:${movieByUserIdList.getList()}">
                 <div class="col-sm-3 col-md-2 col-lg-2">
                     <div class="movie__images">
-                        <img alt="" src="http://placehold.it/380x600"/>
+                        <img alt="" th:src="${movie.poster}"/>
                     </div>
                     <!-- 评论数 -->
                     <div class="movie__feature">
@@ -25,38 +25,37 @@
                 </div>
 
                 <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
-                    <a class="movie__title link--huge" href="movie.html"
-                    >Last Vegas (2013)</a
-                    >
+                    <a class="movie__title link--huge" href="movie.html" th:text="${movie.name}"></a>
 
-                    <p class="movie__time">105 min</p>
+                    <p class="movie__time" th:text="${movie.duration}"></p>
 
                     <p class="movie__option">
-                        <strong>Country: </strong><a href="#">USA</a>
+                        <strong>Country: </strong><a href="#" th:text="${movie.country}"></a>
                     </p>
                     <p class="movie__option">
-                        <strong>Category: </strong><a href="#">Comady</a>
+                        <strong>Category: </strong><span th:each="c:${movie.categories}">
+                            <a href="#" th:text="${c.name}"></a></span>
                     </p>
                     <p class="movie__option">
-                        <strong>Release date: </strong>November 1, 2013
+                        <strong>Release date: </strong> <a th:text="${movie.releaseTime}"></a>
                     </p>
                     <p class="movie__option">
-                        <strong>Director: </strong><a href="#">Jon Turteltaub</a>
+                        <strong>Director: </strong><a href="#" th:text="${movie.directors}"></a>
                     </p>
                     <p class="movie__option">
-                        <strong>Actors: </strong><a href="#">Robert De Niro</a>,
-                        <a href="#">Michael Douglas</a>, <a href="#">Morgan Freeman</a>,
-                        <a href="#">Kevin Kline</a>, <a href="#">Mary Steenburgen</a>,
-                        <a href="#">Jerry Ferrara</a>, <a href="#">Romany Malco</a>
-                        <a href="#">...</a>
+                        <strong>Actors: </strong><a href="#" th:text="${movie.actors}"></a>
                     </p>
-                    <p class="movie__option">
-                        <strong>Age restriction: </strong><a href="#">13</a>
-                    </p>
-
                     <div class="movie__btns">
-                        <a class="btn btn-md btn--warning" href="/book1">预订此电影</a>
-                        <a class="watchlist" href="/watchlist">添加到播放列表</a>
+                        <a class="btn btn-md btn--warning" href="/movies">预订此电影</a>
+
+                        <div th:unless="${session.user == null}">
+                            <input hidden id="watchlist-userId" name="userId" th:value="${session.user.id}">
+                        </div>
+                        <input hidden id="watchlistMovieId" name="movieId" th:value="${movie.id}">
+
+                        <a class="watchlist watch-remove" th:onclick="|remove(${movie.id})|">从播放列表移除</a>
+                        <!--th:href="@{/watch(userId=${session.user.getId()},movieId=${movie.getId()})}"-->
+
                     </div>
 
                     <div class="preview-footer">
@@ -74,8 +73,10 @@
 
             <div class="coloum-wrapper">
                 <div class="pagination paginatioon--full">
-                    <a class="pagination__prev" href="#">prev</a>
-                    <a class="pagination__next" href="#">next</a>
+                    <a class="pagination__prev" th:href="@{/watch(page=${movieByUserIdList.pageNum}-1)}"
+                       th:if="${movieByUserIdList.hasPreviousPage}">prev</a>
+                    <a class="pagination__next" th:href="@{/watch(page=${movieByUserIdList.pageNum}+1)}"
+                       th:if="${movieByUserIdList.hasNextPage}">next</a>
                 </div>
             </div>
         </div>

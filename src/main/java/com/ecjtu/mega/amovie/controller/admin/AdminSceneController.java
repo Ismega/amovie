@@ -17,6 +17,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 /**
  * @author mega
  */
@@ -141,7 +143,7 @@ public class AdminSceneController {
      */
     @PostMapping("/movies/{id}/scenes")
     public ResponseEntity getSceneByMovieId(@PathVariable(value = "id") Integer id) {
-        int count = service.findByMovieId(id);
-        return new ResponseEntity(count, HttpStatus.OK);
+        List<Scene> scenes = service.findByMovieId(id);
+        return new ResponseEntity(scenes, HttpStatus.OK);
     }
 }

@@ -59,7 +59,6 @@ public class UserController {
         }
     }
 
-    //,consumes = MediaType.APPLICATION_JSON_UTF8_VALUE
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
     public ResponseEntity register(@RequestBody @Valid UserForm userForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {

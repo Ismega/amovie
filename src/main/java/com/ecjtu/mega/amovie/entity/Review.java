@@ -26,6 +26,7 @@ public class Review {
      *
      */
     private String nickname;
+
     public Review(String content, Integer movieId, Integer userId, Date createTime) {
         this.content = content;
         this.movieId = movieId;

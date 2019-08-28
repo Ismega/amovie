@@ -57,4 +57,8 @@ public interface ReviewRepository {
      */
     @Select("select * from review where movie_id=#{movieId}")
     List<Review> findByMovieId(Integer movieId);
+
+    @Select("select count(*) from review where movie_id=#{movieId}")
+    int findCount(Integer id);
+
 }

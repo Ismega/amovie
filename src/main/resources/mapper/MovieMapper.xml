@@ -36,6 +36,11 @@
         </collection>
     </resultMap>
 
+    <select id="findMovieByUserId" resultMap="findMovieAndCategory" parameterType="int">
+        SELECT movie.*,watch.id wid,watch.user_id wuserid FROM movie LEFT JOIN watch
+        ON watch.movie_id=movie.id WHERE watch.user_id=#{userId}
+    </select>
+
     <select id="selectCategories" parameterType="int" resultType="Category">
         SELECT category.* FROM relation LEFT JOIN category
         ON category.id=relation.category_id WHERE movie_id=#{id};
@@ -63,5 +68,6 @@
         WHERE movie.id IN(
         SELECT relation.movie_id FROM relation WHERE relation.category_id=#{categoryId})
     </select>
+
 
 </mapper>

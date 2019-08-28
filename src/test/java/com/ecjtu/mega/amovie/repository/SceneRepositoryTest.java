@@ -56,7 +56,7 @@ public class SceneRepositoryTest {
 
     @Test
     public void findByMovieId() {
-        int res = repository.findByMovieId(4);
-        Assert.assertEquals(2, res);
+        List<Scene> scenes = repository.findByMovieId(4);
+        System.out.println(scenes);
     }
 }

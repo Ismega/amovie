@@ -37,6 +37,12 @@ public class ReviewController {
         return "movie";
     }
 
+    /**
+     * 添加影评
+     *
+     * @param reviewForm
+     * @return
+     */
     @PostMapping
     public String add(@RequestBody @Valid ReviewForm reviewForm) {
         Review review = new Review();

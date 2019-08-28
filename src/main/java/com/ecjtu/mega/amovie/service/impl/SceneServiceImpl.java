@@ -43,7 +43,7 @@ public class SceneServiceImpl implements SceneService {
     }
 
     @Override
-    public int findByMovieId(Integer movieId) {
+    public List<Scene> findByMovieId(Integer movieId) {
         return repository.findByMovieId(movieId);
     }
 }

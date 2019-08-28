@@ -23,7 +23,7 @@
 
                         <h1><a class="post__title-link" href="single-page-full.html" th:text="${news.getTitle()}"></a>
                         </h1>
-                        <p class="post__date" th:text="${news.getCreateTime()}"></p>
+                        <p class="post__date" th:text="${#dates.format(news.getCreateTime(),'yyyy-MM-dd')}"></p>
 
                         <div class="wave-devider"></div>
 

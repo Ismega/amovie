@@ -51,6 +51,11 @@ public class ReviewServiceImpl implements ReviewService {
         return repository.delete(id);
     }
 
+    @Override
+    public int findCount(Integer movieId) {
+        return repository.findCount(movieId);
+    }
+
     /**
      * 根据电影id，发表影评
      *

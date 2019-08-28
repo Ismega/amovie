@@ -101,4 +101,9 @@ public class MovieServiceImpl implements MovieService {
     public List<Movie> findByStatus(Integer status) {
         return repository.findByStatus(status);
     }
+
+    @Override
+    public List<Movie> findMovieByUserId(Integer userId) {
+        return repository.findMovieByUserId(userId);
+    }
 }

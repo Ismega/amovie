@@ -30,16 +30,17 @@
                         <p class="movie__option">
                             <strong>国家: </strong><a href="" th:text="${movie.getCountry()}"></a>
                         </p>
-                        <p class="movie__option">
+                        <p class="movie__option"><!--#strings.substring(movie.getReleaseTime(),24,28)-->
                             <strong>年份: </strong><a href=""
-                                                    th:text="${#strings.substring(movie.getReleaseTime(),0,4)}"></a>
+                                                    th:text="${movie.getReleaseTime().getYear()}"></a>
                         </p>
                         <p class="movie__option">
                             <strong>类别: </strong><a href="" th:each="c : ${movie.getCategories()}"
                                                     th:text="${c.name}"></a>
                         </p>
                         <p class="movie__option">
-                            <strong>上映日期: </strong><a th:text="${movie.getReleaseTime()}"></a></p>
+                            <strong>上映日期: </strong><a
+                                th:text="${#dates.format(movie.getReleaseTime(),'yyyy-MM-dd')}"></a></p>
                         <p class="movie__option">
                             <strong>导演: </strong><a href="" th:text="${movie.directors}"></a>
                         </p>
@@ -47,12 +48,20 @@
                             <strong>演员: </strong>
                             <a href="" th:text="${movie.actors}"></a>
 
-                        <p><a class="comment-link" href="">评论: 15</a></p>
+                        <p><a class="comment-link" href="" th:text="${count}">评论: 15</a></p>
                         </p>
 
-                        <div class="movie__btns movie__btns--full">
-                            <a class="btn btn-md btn--warning" href="#">预订此电影</a>
-                            <a class="watchlist" href="#">添加到播放列表</a>
+                        <div class="movie__btns">
+                            <a class="btn btn-md btn--warning" href="/movies">预订此电影</a>
+
+                            <div th:unless="${session.user == null}">
+                                <input hidden id="watchlist-userId" name="userId" th:value="${session.user.getId()}">
+                                <a class="watchlist" th:onclick="|add(${movie.getId()})|">添加到播放列表</a>
+
+                            </div>
+
+                            <!--th:href="@{/watch(userId=${session.user.getId()},movieId=${movie.getId()})}"-->
+
                         </div>
                     </div>
                 </div>
@@ -75,27 +84,23 @@
                             <p class="time-select__place">Curzon</p>
                         </div>
                         <ul class="col-sm-8 items-wrap">
-                            <li class="time-select__item" data-time="09:00">09:00</li>
-                            <li class="time-select__item" data-time="11:00">11:00</li>
-                            <li class="time-select__item" data-time="13:00">13:00</li>
-                            <li class="time-select__item" data-time="15:00">15:00</li>
-                            <li class="time-select__item" data-time="17:00">17:00</li>
-                            <li class="time-select__item" data-time="19:0">19:00</li>
-                            <li class="time-select__item" data-time="21:0">21:00</li>
-                            <li class="time-select__item" data-time="23:0">23:00</li>
-                            <li class="time-select__item" data-time="01:0">01:00</li>
+                            <li class="time-select__item" data-time="09:00" th:each="scene:${sceneList}"
+                                th:text="${scene.getShowtime()}">09:00
+                            </li>
                         </ul>
                     </div>
 
                 </div>
 
-                <h2 class="page-heading">评论 (15)</h2>
+                <h2 class="page-heading">评论 <a th:text="${count}"></a></h2>
 
                 <div class="comment-wrapper">
                     <form class="comment-form" id="comment-form" method="post">
                         <textarea class="comment-form__text" name="content" placeholder="发表您的评论吧"></textarea>
                         <input hidden id="form-movieId" name="movieId" th:value="${movie.getId()}" type="text">
-                        <input hidden id="form-userId" name="userId" th:value="${session.user.getId()}" type="text">
+                        <div th:unless="${session.user == null}">
+                            <input hidden id="form-userId" name="userId" th:value="${session.user.getId()}" type="text">
+                        </div>
                         <button class="btn btn-md btn--danger comment-form__btn" type="submit">
                             发表评论
                         </button>
@@ -115,23 +120,25 @@
 
                         <!-- 回复提示框的展开，在custom.js 1069行 -->
                         <!-- 评论回复 -->
-                        <div class="comment comment--answer">
-                            <a class="comment__author" href="#">Dmitriy Pustovalov</a>
-                            <p class="comment__date">today | 10:19</p>
-                            <p class="comment__message">
-                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                                vitae enim sollicitudin, euismod erat id, fringilla lacus.
-                                Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra
-                                a, mattis in velit. Morbi molestie rhoncus enim, vitae
-                                sagittis dolor tristique et.
-                            </p>
-                            <a class="comment__reply" href="#">Reply</a>
-                        </div>
+                        <!-- <div class="comment comment&#45;&#45;answer">
+                             <a class="comment__author" href="#">Dmitriy Pustovalov</a>
+                             <p class="comment__date">today | 10:19</p>
+                             <p class="comment__message">
+                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
+                                 vitae enim sollicitudin, euismod erat id, fringilla lacus.
+                                 Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra
+                                 a, mattis in velit. Morbi molestie rhoncus enim, vitae
+                                 sagittis dolor tristique et.
+                             </p>
+                             <a class="comment__reply" href="#">Reply</a>
+                         </div>-->
                         <!-- 回复结束 -->
                     </div>
                 </div>
+
             </div>
         </div>
+
     </section>
 
     <div class="clearfix"></div>

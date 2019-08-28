@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletRequest;
 import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.UUID;
 
 /**
  * @author mega
@@ -33,17 +34,22 @@ public class AdminUploadController {
             return new ResponseEntity("上传失败，请选择文件", HttpStatus.BAD_REQUEST);
         }
         String fileName = file.getOriginalFilename();
+
+        String newFile = UUID.randomUUID().toString();
+        String lastFile = fileName.substring(fileName.lastIndexOf("."));
+
+        String des = newFile + lastFile;
+
         String filePath = myproperties.getLocation();
         File file1 = new File(filePath);
         Map<String, String> map = new HashMap<>();
         if (!file1.exists()) {
             file1.mkdir();
         }
-        File f = new File(filePath + File.separator + fileName);
-//        String des = filePath+File.separator+fileName;
+        File f = new File(filePath + File.separator + des);
         try {
             file.transferTo(f);
-            String url = File.separator + "upload" + File.separator + fileName;
+            String url = File.separator + "upload" + File.separator + des;
             map.put("url", url);
             return new ResponseEntity(map, HttpStatus.OK);
         } catch (Exception e) {

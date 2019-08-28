@@ -4,6 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Date;
 import java.util.List;
 
 @Data
@@ -25,7 +26,7 @@ public class Movie {
     /**
      * 电影上映日期
      */
-    private String releaseTime;
+    private Date releaseTime;
     /**
      * 电影上映状态，1为已上映，0为未上映
      */
@@ -44,7 +45,7 @@ public class Movie {
 
     public Movie(String name, String duration,
                  String directors, String actors,
-                 String releaseTime,
+                 Date releaseTime,
                  Integer status, String plot, String country) {
         this.name = name;
         this.duration = duration;
@@ -57,7 +58,7 @@ public class Movie {
     }
 
     public Movie(Integer id, String name, String duration,
-                 String directors, String actors, String releaseTime,
+                 String directors, String actors, Date releaseTime,
                  Integer status, String plot, String country) {
         this.id = id;
         this.name = name;

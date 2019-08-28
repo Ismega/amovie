@@ -64,6 +64,6 @@ public interface SceneRepository {
      * @param movieId
      * @return
      */
-    @Select("select count(*) from scene where movie_id=#{movieId}")
-    int findByMovieId(Integer movieId);
+    @Select("select * from scene where movie_id=#{movieId}")
+    List<Scene> findByMovieId(Integer movieId);
 }

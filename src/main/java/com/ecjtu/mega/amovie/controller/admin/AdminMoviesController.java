@@ -85,7 +85,6 @@ public class AdminMoviesController {
      * @param movieForm
      * @return
      */
-    @Transactional
     @PostMapping
     public ResponseEntity insert(@RequestBody @Valid MovieForm movieForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
@@ -96,10 +95,10 @@ public class AdminMoviesController {
         Integer[] categoryIds = movieForm.getCategoryIds();
         if (categoryIds != null) {
             Movie movie = new Movie();
-            movie.setName(movieForm.getName());
-            System.out.println(movie.getName());
-            //MovieForm转换成Movie对象了
             BeanUtils.copyProperties(movieForm, movie);
+
+            System.out.println(movie.getReleaseTime());
+
             int result = categoryService.insertRelation(movie, categoryIds);
             if (result != 0) {
                 return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
@@ -108,37 +107,6 @@ public class AdminMoviesController {
         throw new CommonException("增加失败");
     }
 
-    /**
-     * 修改电影信息
-     *
-     * @param id
-     * @param movieForm
-     * @return
-     */
-    @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable(value = "id") Integer id,
-                                 @RequestBody @Valid MovieForm movieForm, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            bindingResult.getFieldError().getDefaultMessage();
-            return new ResponseEntity("请输入完整电影信息！", HttpStatus.BAD_REQUEST);
-        }
-        Movie movie1 = service.findById(id);
-        if (movie1 != null) {
-            Integer[] categoryIds = movieForm.getCategoryIds();
-            if (categoryIds != null) {
-                Movie movie = new Movie();
-                //MovieForm转换成Movie对象了
-                BeanUtils.copyProperties(movieForm, movie);
-                movie.setId(id);
-                int result = categoryService.updateRelation(movie, categoryIds);
-                if (result != 0) {
-                    return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
-                }
-                return ResponseEntity.badRequest().build();
-            }
-        }
-        throw new NotFoundException("资源未找到");
-    }
 
     /**
      * 删除电影信息

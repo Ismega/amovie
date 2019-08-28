@@ -142,7 +142,7 @@ function init_Home() {
         score: 0,
         path: '/images/rate/',
         starOff: 'star-off.svg',
-        starOn: ''
+        starOn: 'star-on.svg'
     });
 
     //5. Scroll down navigation function
@@ -743,6 +743,29 @@ function init_MovieList() {
 
     });
 
+    //观看列表
+    /*    $('.watchlist').click(function (e) {
+            e.preventDefault();
+            var userId = $('#watchlist-userId').val();
+            var movieId = $('#watchlistMovieId').val();
+            var data = {
+                userId:userId,
+                movieId:movieId,
+            };
+            $.ajax({
+                url: '/api/watch',
+                method: 'POST',
+                contentType: 'application/json',
+                data: JSON.stringify(data),
+                dataType: 'json',
+                success:function () {
+                    window.location.href='/watch';
+                },
+            });
+
+        });*/
+
+
     //3. Rating scrore init
     //Rating star
     $('.score').raty({
@@ -797,8 +820,55 @@ function init_MovieList() {
     });
 }
 
+//添加至观看列表
+function add(movieId) {
+    var userId = $('#watchlist-userId').val();
+    console.log(movieId);
+    var data = {
+        userId: userId,
+        movieId: movieId,
+    };
+    $.ajax({
+        url: '/api/watch',
+        method: 'POST',
+        contentType: 'application/json',
+        data: JSON.stringify(data),
+        dataType: 'json',
+        success: function () {
+            window.location.href = '/watch';
+        },
+    });
+
+}
+
+//从观看列表移除
+function remove(movieId) {
+    alert("触发？？");
+
+    $.ajax({
+        url: '/api/watch/' + movieId,
+        // type:'post',
+        method: 'DELETE',
+        contentType: 'application/json',
+        data: {
+            movieId: movieId,
+        },
+        dataType: 'json',
+        success: function () {
+            alert("是否移除");
+            window.location.href = '/watch';
+        },
+    });
+
+}
 function init_MoviePage() {
     "use strict";
+
+    //查询
+    $('#search-form').click(function (e) {
+        e.preventDefault();
+
+    });
 
     //1. Rating scrore init
     //Rating star
@@ -839,6 +909,7 @@ function init_MoviePage() {
 
     $('.comment-form__btn').click(function (e) {
         e.preventDefault();
+
         var movieId = $('#form-movieId').val();
         var content = $('.comment-form__text').val();
         var userId = $('#form-userId').val();
@@ -869,6 +940,7 @@ function init_MoviePage() {
         })
     });
 
+
     //7. Timetable active element
     $('.time-select__item').click(function () {
         $('.time-select__item').removeClass('active');
@@ -893,7 +965,7 @@ function init_Rates() {
         score: 0,
         path: '/images/rate/',
         starOff: 'star-off.svg',
-        starOn: ''
+        starOn: 'star-on.svg'
     });
 
     //After rate callback

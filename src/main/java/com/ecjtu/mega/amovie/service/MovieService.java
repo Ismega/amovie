@@ -70,4 +70,12 @@ public interface MovieService {
      * @return
      */
     List<Movie> findByStatus(Integer status);
+
+    /**
+     * 根据用户id查
+     *
+     * @param userId
+     * @return
+     */
+    List<Movie> findMovieByUserId(Integer userId);
 }
