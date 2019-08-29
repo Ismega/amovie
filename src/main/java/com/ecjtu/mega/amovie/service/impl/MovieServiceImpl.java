@@ -38,7 +38,7 @@ public class MovieServiceImpl implements MovieService {
      * @return
      */
     @Override
-    public List<Movie> findByName(String name) {
+    public List<Movie> findByMovieName(String name) {
         return repository.findByMovieName(name);
     }
 
@@ -105,5 +105,25 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<Movie> findMovieByUserId(Integer userId) {
         return repository.findMovieByUserId(userId);
+    }
+
+    @Override
+    public List<Movie> findByActor(String actor) {
+        return repository.findByActor(actor);
+    }
+
+    @Override
+    public List<Movie> findByDirector(String director) {
+        return repository.findByDirector(director);
+    }
+
+    @Override
+    public List<Movie> findByCategory(String category) {
+        return repository.findByCategory(category);
+    }
+
+    @Override
+    public List<Movie> findByCountry(String country) {
+        return repository.findByCountry(country);
     }
 }

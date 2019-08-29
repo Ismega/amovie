@@ -34,17 +34,6 @@ public class AdminReviewController {
         return new ResponseEntity(reviewList, HttpStatus.OK);
     }
 
-/*    @GetMapping("/{movieId}")
-    public String findByMovieId(@PathVariable(value = "movieId") Integer movieId,
-                                Model model) {
-        List<Review> reviews = service.findByMovieId(movieId);
-        if (reviews!= null) {
-            model.addAttribute("reviews",reviews);
-            return "movie";
-        }
-        return null;
-    }*/
-
     /**
      * 发表评论
      *

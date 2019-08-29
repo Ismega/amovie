@@ -28,7 +28,14 @@ public interface WatchRepository {
     @Select("select * from watch")
     List<Watch> findAll();
 
-    List<Watch> findMovieByUserId(Integer userId);
+    /**
+     * 根据电影id查询观看列表
+     *
+     * @param movieId
+     * @return
+     */
+    @Select("select * from watch where movie_id=#{movieId} and user_id=#{userId}")
+    Watch findByMovieId(Integer movieId, Integer userId);
 
     /**
      * 从观看列表移除
@@ -36,6 +43,6 @@ public interface WatchRepository {
      * @param movieId
      * @return
      */
-    @Delete("delete from watch where movie_id=#{movieId}")
-    int deleteWatch(Integer movieId);
+    @Delete("delete from watch where movie_id=#{movieId} and user_id=#{userId}")
+    int deleteWatch(Integer movieId, Integer userId);
 }

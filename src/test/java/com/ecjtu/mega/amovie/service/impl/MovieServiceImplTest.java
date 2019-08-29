@@ -29,7 +29,7 @@ public class MovieServiceImplTest {
 
     @Test
     public void findByName() {
-        List<Movie> movie = service.findByName("哪吒之魔童");
+        List<Movie> movie = service.findByMovieName("哪吒之魔童");
         System.out.println(movie);
     }
 

@@ -81,6 +81,20 @@ public interface MovieRepository {
     @Select("select * from movie where status=#{status}")
     List<Movie> findByStatus(Integer status);
 
+    /**
+     * 观看列表根据用户id查询电影列表
+     *
+     * @param userId
+     * @return
+     */
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     List<Movie> findMovieByUserId(Integer userId);
+
+    List<Movie> findByActor(String actor);
+
+    List<Movie> findByDirector(String director);
+
+    List<Movie> findByCategory(String category);
+
+    List<Movie> findByCountry(String country);
 }

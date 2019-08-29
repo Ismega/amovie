@@ -36,33 +36,4 @@ public class ReviewController {
         model.addAttribute("reviews", reviews);
         return "movie";
     }
-
-    /**
-     * 添加影评
-     *
-     * @param reviewForm
-     * @return
-     */
-    @PostMapping
-    public String add(@RequestBody @Valid ReviewForm reviewForm) {
-        Review review = new Review();
-        BeanUtils.copyProperties(reviewForm, review);
-        review.setCreateTime(new Date());
-        int res = service.publish(review);
-        if (res > 0) {
-            return "movie";
-        }
-        return null;
-    }
-
-    @GetMapping("/{movieId}")
-    public String findByMovieId(@PathVariable(value = "movieId") Integer movieId,
-                                Model model) {
-        List<Review> reviews = service.findByMovieId(movieId);
-        if (reviews != null) {
-            model.addAttribute("reviews", reviews);
-            return "movie";
-        }
-        return null;
-    }
 }

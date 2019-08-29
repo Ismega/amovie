@@ -19,9 +19,4 @@ public class Watch {
     private Integer movieId;
     private Date createTime;
 
-    public Watch(Integer userId, Integer movieId, Date createTime) {
-        this.userId = userId;
-        this.movieId = movieId;
-        this.createTime = createTime;
-    }
 }

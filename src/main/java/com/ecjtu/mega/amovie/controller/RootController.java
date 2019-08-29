@@ -69,6 +69,10 @@ public class RootController {
         return "watchlist";
     }
 
+    @RequestMapping("/search")
+    public String search() {
+        return "search";
+    }
 
 
 }

@@ -29,12 +29,12 @@ public class WatchServiceImpl implements WatchService {
     }
 
     @Override
-    public List<Watch> findByUserId(Integer userId) {
-        return repository.findMovieByUserId(userId);
+    public Watch findByMovieId(Integer movieId, Integer userId) {
+        return repository.findByMovieId(movieId, userId);
     }
 
     @Override
-    public int deleteWatch(Integer movieId) {
-        return repository.deleteWatch(movieId);
+    public int deleteWatch(Integer movieId, Integer userId) {
+        return repository.deleteWatch(movieId, userId);
     }
 }

@@ -13,23 +13,23 @@
     <!-- Search bar -->
     <div class="search-wrapper">
         <div class="container container--add">
-            <form class="search" id="search-form" method="post">
+            <!--<form class="search" id="search-form" method="post">
                 <input class="search__field" name="search" placeholder="Search" type="text"/>
                 <select
                         class="search__sort"
                         id="search-sort"
                         name="sorting_item"
                         tabindex="0">
-                    <option selected="selected" value="byMovieName">By movieName</option>
+                    <option value="byMovieName" selected="selected">By movieName</option>
                     <option value="byActor">By actor</option>
                     <option value="byDirector">By director</option>
                     <option value="byCategory">By category</option>
-                    <option value="byCountry">By country</option>
+                    <option value="byYear">By year</option>
                 </select>
-                <button class="btn btn-md btn--danger search__button" type="submit">
+                <button class="btn btn-md btn&#45;&#45;danger search__button" type="submit">
                     search movie
                 </button>
-            </form>
+            </form>-->
         </div>
     </div>
 
@@ -65,14 +65,13 @@
 
                 <form class="select select--film-category" method="get">
                     <select class="select__sort" name="select_item" tabindex="0">
-                        <option value="2">Children's</option>
+                        <option selected="selected" value="2">Children's</option>
                         <option value="3">Comedy</option>
                         <option value="4">Drama</option>
                         <option value="5">Fantasy</option>
                         <option value="6">Horror</option>
                         <option value="7">Thriller</option>
                     </select>
-
                 </form>
             </div>
 
@@ -175,12 +174,12 @@
 
             <!-- end movie preview item -->
 
-            <div class="coloum-wrapper">
-                <div class="pagination paginatioon--full">
-                    <a class="pagination__prev" th:href="@{/movies(page=${movieList.pageNum}-1)}">prev</a>
-                    <a class="pagination__next" th:href="@{/movies(page=${movieList.pageNum}+1)}">next</a>
-                </div>
-            </div>
+            <!-- <div class="coloum-wrapper">
+                 <div class="pagination paginatioon&#45;&#45;full">
+                     <a class="pagination__prev" th:href="@{/movies(page=${movieList.pageNum}-1)}">prev</a>
+                     <a class="pagination__next" th:href="@{/movies(page=${movieList.pageNum}+1)}">next</a>
+                 </div>
+             </div>-->
         </div>
     </section>
 

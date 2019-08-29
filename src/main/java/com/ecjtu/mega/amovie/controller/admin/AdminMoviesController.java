@@ -151,4 +151,5 @@ public class AdminMoviesController {
         List<Movie> movies = service.findByStatus(Status.ON);
         return new ResponseEntity(movies, HttpStatus.OK);
     }
+
 }

@@ -730,6 +730,19 @@ function init_Gallery() {
 function init_MovieList() {
     "use strict";
 
+    //查询
+    $('.search__button').click(function (e) {
+        e.preventDefault();
+        var searchContent = $('.search__field').val().replace(/\s+/g, "");
+        var selected = $('#search-sort').val();
+        var data = {
+            searchContent: searchContent,
+        };
+        window.location.href = '/search/' + selected + '/' + searchContent;
+
+    });
+
+
     //1. Dropdown init
     //select
     $(".select__sort").selectbox({
@@ -742,28 +755,6 @@ function init_MovieList() {
         }
 
     });
-
-    //观看列表
-    /*    $('.watchlist').click(function (e) {
-            e.preventDefault();
-            var userId = $('#watchlist-userId').val();
-            var movieId = $('#watchlistMovieId').val();
-            var data = {
-                userId:userId,
-                movieId:movieId,
-            };
-            $.ajax({
-                url: '/api/watch',
-                method: 'POST',
-                contentType: 'application/json',
-                data: JSON.stringify(data),
-                dataType: 'json',
-                success:function () {
-                    window.location.href='/watch';
-                },
-            });
-
-        });*/
 
 
     //3. Rating scrore init
@@ -834,17 +825,22 @@ function add(movieId) {
         contentType: 'application/json',
         data: JSON.stringify(data),
         dataType: 'json',
-        success: function () {
-            window.location.href = '/watch';
-        },
+        statusCode: {
+            200: function () {
+                location.reload();
+                alert("添加成功");
+            },
+            400: function () {
+                alert("已在观看列表！");
+            }
+        }
     });
 
 }
 
 //从观看列表移除
 function remove(movieId) {
-    alert("触发？？");
-
+    alert("是否移除");
     $.ajax({
         url: '/api/watch/' + movieId,
         // type:'post',
@@ -854,21 +850,21 @@ function remove(movieId) {
             movieId: movieId,
         },
         dataType: 'json',
-        success: function () {
-            alert("是否移除");
-            window.location.href = '/watch';
+        statusCode: {
+            200: function () {
+                alert("成功");
+                location.reload();
+            },
+            400: function () {
+                alert("失败");
+            }
         },
     });
 
 }
+
 function init_MoviePage() {
     "use strict";
-
-    //查询
-    $('#search-form').click(function (e) {
-        e.preventDefault();
-
-    });
 
     //1. Rating scrore init
     //Rating star
@@ -924,19 +920,15 @@ function init_MoviePage() {
             contentType: 'application/json',
             data: JSON.stringify(data),
             dataType: 'json',
-            success: function (e) {
-                // console.log(e);
-                window.location.href = '/movies/' + movieId;
-
-            },
             statusCode: {
                 200: function () {
                     alert("成功");
+                    location.reload();
                 },
                 400: function () {
                     alert("失败");
                 }
-            }
+            },
         })
     });
 

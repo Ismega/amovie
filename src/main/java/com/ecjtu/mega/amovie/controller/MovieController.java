@@ -58,6 +58,7 @@ public class MovieController {
         return "movie-list";
     }
 
+
     /**
      * 根据id 查询电影
      *
@@ -97,7 +98,7 @@ public class MovieController {
      * @param movieForm
      * @return
      */
-    @PostMapping
+/*    @PostMapping
     public ResponseEntity insert(@RequestBody MovieForm movieForm) {
 
         //MovieForm对象
@@ -112,7 +113,7 @@ public class MovieController {
             }
         }
         throw new CommonException("增加失败");
-    }
+    }*/
 
     /**
      * 修改电影信息
@@ -121,7 +122,7 @@ public class MovieController {
      * @param movieForm
      * @return
      */
-    @PutMapping("/{id}")
+/*    @PutMapping("/{id}")
     public ResponseEntity update(@PathVariable(value = "id") Integer id,
                                  @RequestBody MovieForm movieForm) {
         Movie movie1 = service.findById(id);
@@ -139,7 +140,7 @@ public class MovieController {
             }
         }
         throw new NotFoundException("资源未找到");
-    }
+    }*/
 
     /**
      * 删除电影信息
@@ -147,7 +148,7 @@ public class MovieController {
      * @param id
      * @return
      */
-    @DeleteMapping("/{id}")
+  /*  @DeleteMapping("/{id}")
     public ResponseEntity delete(@PathVariable(value = "id") Integer id) {
         Movie movie = service.findById(id);
         if (movie != null) {
@@ -157,7 +158,7 @@ public class MovieController {
             }
         }
         throw new NotFoundException("资源未找到");
-    }
+    }*/
 
     /**
      * 根据类型id查询电影
@@ -165,12 +166,12 @@ public class MovieController {
      * @param id
      * @return
      */
-    @GetMapping("/category/{id}")
+  /*  @GetMapping("/category/{id}")
     public ResponseEntity findByCategoryId(@PathVariable(value = "id") Integer id) {
         List<Movie> movies = service.findByCategoryId(id);
         if (movies != null) {
             return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
         }
         throw new NotFoundException("查询失败");
-    }
+    }*/
 }

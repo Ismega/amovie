@@ -22,7 +22,7 @@ public interface MovieService {
      * @param name
      * @return
      */
-    List<Movie> findByName(String name);
+    List<Movie> findByMovieName(String name);
 
     /**
      * 添加电影信息
@@ -78,4 +78,12 @@ public interface MovieService {
      * @return
      */
     List<Movie> findMovieByUserId(Integer userId);
+
+    List<Movie> findByActor(String actor);
+
+    List<Movie> findByDirector(String actor);
+
+    List<Movie> findByCategory(String category);
+
+    List<Movie> findByCountry(String country);
 }

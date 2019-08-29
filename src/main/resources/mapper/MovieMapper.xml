@@ -54,20 +54,41 @@
         select * from movie where id=#{id}
     </select>
 
-    <select id="findByMovieName" resultMap="findMovieAndCategory" parameterType="String">
+    <!-- sql 片段-->
+    <sql id="findBy">
         SELECT movie.*,category.id catId,category.`name` catName
         FROM movie LEFT JOIN relation ON movie.id=relation.movie_id
         LEFT JOIN category ON category.id=relation.category_id
+    </sql>
+
+    <select id="findByMovieName" resultMap="findMovieAndCategory" parameterType="String">
+        <include refid="findBy"></include>
         WHERE movie.`name` LIKE concat("%",#{name},"%")
     </select>
 
     <select id="findByCategoryId" resultMap="findMovieAndCategory" parameterType="int">
-        SELECT movie.*,category.id catId,category.`name` catName
-        FROM movie LEFT JOIN relation ON movie.id=relation.movie_id
-        LEFT JOIN category ON category.id=relation.category_id
+        <include refid="findBy"></include>
         WHERE movie.id IN(
         SELECT relation.movie_id FROM relation WHERE relation.category_id=#{categoryId})
     </select>
 
+    <select id="findByActor" resultMap="findMovieAndCategory" parameterType="String">
+        <include refid="findBy"></include>
+        WHERE movie.actors LIKE concat("%",#{actor},"%")
+    </select>
+
+    <select id="findByDirector" resultMap="findMovieAndCategory" parameterType="String">
+        <include refid="findBy"></include>
+        WHERE movie.directors LIKE concat("%",#{director},"%")
+    </select>
+    <select id="findByCategory" resultMap="findMovieAndCategory" parameterType="String">
+        <include refid="findBy"></include>
+        WHERE category.`name` LIKE concat("%",#{category},"%")
+    </select>
+
+    <select id="findByCountry" resultMap="findMovieAndCategory" parameterType="String">
+        <include refid="findBy"></include>
+        WHERE movie.country LIKE concat("%",#{country},"%")
+    </select>
 
 </mapper>

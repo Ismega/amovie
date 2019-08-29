@@ -10,7 +10,7 @@ public interface WatchService {
 
     List<Watch> findAll();
 
-    List<Watch> findByUserId(Integer userId);
+    int deleteWatch(Integer movieId, Integer userId);
 
-    int deleteWatch(Integer movieId);
+    Watch findByMovieId(Integer movieId, Integer userId);
 }

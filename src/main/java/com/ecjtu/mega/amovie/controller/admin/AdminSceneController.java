@@ -15,8 +15,10 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
+import javax.validation.Valid;
 import java.util.List;
 
 /**
@@ -69,7 +71,11 @@ public class AdminSceneController {
      * @return
      */
     @PostMapping
-    public ResponseEntity insert(@RequestBody SceneForm sceneForm) {
+    public ResponseEntity insert(@RequestBody @Valid SceneForm sceneForm, BindingResult bindingResult) {
+        if (bindingResult.hasErrors()) {
+            bindingResult.getFieldError().getDefaultMessage();
+            return new ResponseEntity("电影信息不完全", HttpStatus.BAD_REQUEST);
+        }
         Movie movie = movieService.findById(sceneForm.getMovieId());
         if (movie != null) {
             Scene scene = new Scene();

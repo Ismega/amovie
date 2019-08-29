@@ -55,27 +55,6 @@ public class SceneController {
         }
         throw new NotFoundException("资源未找到");
     }
-
-    /**
-     * 插入数据
-     *
-     * @param sceneForm
-     * @return
-     */
-    @PostMapping
-    public ResponseEntity insert(@RequestBody SceneForm sceneForm) {
-        String[] seats = sceneForm.getBookedSeat();
-        String seat = String.join(",", seats);
-        Scene scene = new Scene();
-        BeanUtils.copyProperties(sceneForm, scene);
-        scene.setBookedSeat(seat);
-        int result = service.save(scene);
-        if (result < 1) {
-            throw new CommonException("插入失败");
-        }
-        return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
-    }
-
     /**
      * 更新
      *

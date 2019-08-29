@@ -25,8 +25,6 @@ public class WatchController {
 
     @Autowired
     private WatchService service;
-    @Autowired
-    private MovieService movieService;
 
     /**
      * 获取所有观看电影列表
@@ -45,37 +43,6 @@ public class WatchController {
         return "watchlist";
     }
 
-    /**
-     * 显示观看列表
-     *
-     * @param page
-     * @param size
-     * @param model
-     * @return
-     */
-    @GetMapping
-    public String Watch(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                        @RequestParam(value = "size", required = false, defaultValue = "20") Integer size,
-                        Model model,
-                        HttpSession session) {
-        User user = (User) session.getAttribute("user");
-        PageInfo<Movie> movieByUserIdList = PageHelper.startPage(page, size).doSelectPageInfo(() -> movieService.findMovieByUserId(user.getId()));
-        if (movieByUserIdList != null) {
-            model.addAttribute("movieByUserIdList", movieByUserIdList);
-            return "watchList";
-        }
-        return null;
-    }
-
-    @DeleteMapping("/{movieId}")
-    public String deleteWatch(@PathVariable(value = "movieId") Integer movieId) {
-
-        int result = service.deleteWatch(movieId);
-        if (result > 0) {
-            return "watchList";
-        }
-        return null;
-    }
 
 
 }
