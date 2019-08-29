@@ -16,14 +16,15 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 
-/**
- * @author mega
- */
+
 @RestController
 @RequestMapping("/api/categories")
 @CrossOrigin
 /**
  * 类别
+ */
+/**
+ * @author mega
  */
 public class AdminCategoryController {
 

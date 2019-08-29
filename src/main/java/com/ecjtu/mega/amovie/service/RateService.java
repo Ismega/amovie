@@ -7,5 +7,11 @@ import com.ecjtu.mega.amovie.entity.Score;
  */
 public interface RateService {
 
+    /**
+     * 添加评分
+     *
+     * @param score
+     * @return
+     */
     int insert(Score score);
 }

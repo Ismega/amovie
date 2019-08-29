@@ -9,6 +9,12 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface RateRepository {
 
+    /**
+     * 添加评分
+     *
+     * @param score
+     * @return
+     */
     @Insert("insert into score () values()")
     int insert(Score score);
 }

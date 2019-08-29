@@ -90,11 +90,32 @@ public interface MovieRepository {
     @Options(useGeneratedKeys = true, keyProperty = "id", keyColumn = "id")
     List<Movie> findMovieByUserId(Integer userId);
 
+    /**
+     * 根据演员查询电影
+     *
+     * @param actor
+     * @return
+     */
     List<Movie> findByActor(String actor);
 
+    /**
+     * 根据导演查询电影
+     * @param director
+     * @return
+     */
     List<Movie> findByDirector(String director);
 
+    /**
+     * 根据类型查询电影
+     * @param category
+     * @return
+     */
     List<Movie> findByCategory(String category);
 
+    /**
+     * 根据国家查询电影
+     * @param country
+     * @return
+     */
     List<Movie> findByCountry(String country);
 }

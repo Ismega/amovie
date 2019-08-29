@@ -16,10 +16,12 @@ import java.util.List;
 @Repository
 public interface SceneRepository {
 
-    @Select("select * from scene")
     /**
-     * 查询所有场次
+     * 查询所有场次信息
+     *
+     * @return
      */
+    @Select("select * from scene")
     List<Scene> findAll();
 
     /**

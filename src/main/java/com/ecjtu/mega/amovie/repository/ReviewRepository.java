@@ -43,7 +43,7 @@ public interface ReviewRepository {
     int delete(Integer id);
 
     /**
-     *
+     * 更新影评
      * @param review
      * @return
      */
@@ -58,6 +58,12 @@ public interface ReviewRepository {
     @Select("select * from review where movie_id=#{movieId}")
     List<Review> findByMovieId(Integer movieId);
 
+    /**
+     * 根据电影id查询影评数
+     *
+     * @param id
+     * @return
+     */
     @Select("select count(*) from review where movie_id=#{movieId}")
     int findCount(Integer id);
 

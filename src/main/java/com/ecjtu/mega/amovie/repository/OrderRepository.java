@@ -51,6 +51,12 @@ public interface OrderRepository {
     @Select("select * from `order`")
     List<Order> findAll();
 
+    /**
+     * 根据订单id删除订单
+     *
+     * @param id
+     * @return
+     */
     @Delete("delete from `order` where id=#{id}")
     int delete(Integer id);
 
