@@ -112,7 +112,6 @@ $(function () {
             data: formInput,
             dataType: 'json',
             success: function (data) {
-                console.log(data);
                 alert(data.message)
                 self.children().fadeOut(300, function () {
                     $(this).remove()
@@ -123,7 +122,6 @@ $(function () {
                 self.find('[type=submit]').attr('disabled', 'disabled');
             },
             error: function (data) {
-                console.log(data);
                 alert(data.responseJSON.message);
             }
         });
@@ -141,7 +139,7 @@ $(function () {
         var $tel = self.find('[type=tel]');
         var $gender = self.find('[type=gender]');
 
-        /*if ($name.val() == "") {
+        if ($name.val() == "") {
             createErrTult('Error! Wrong username!', $name);
         }
 
@@ -158,7 +156,7 @@ $(function () {
         var telRegex = /^1([38]\d|5[0-35-9]|7[3678])\d{8}$/;
         if (!telRegex.test($tel.val())) {
             createErrTult("Error! Wrong telephone!", $email);
-        }*/
+        }
         var data = {
             nickname: $name.val(),
             password: $pass.val(),
@@ -166,7 +164,6 @@ $(function () {
             email: $email.val(),
             gender: $gender.val(),
         };
-        // console.log($gender.val(), $name.val(), $tel.val(), $email.val(), $pass.val());
         $.ajax({
             url: '/register',
             method: 'POST',
@@ -185,7 +182,7 @@ $(function () {
                 self.find('[type=submit]').attr('disabled', 'disabled');
             },
             error: function (data) {
-                alert(data.message);
+                alert(data.responseJSON.message);
             }
         });
 

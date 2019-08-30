@@ -1,6 +1,7 @@
 package com.ecjtu.mega.amovie.repository;
 
 import com.ecjtu.mega.amovie.entity.Movie;
+import com.ecjtu.mega.amovie.entity.Rate;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,8 +11,6 @@ import org.springframework.test.context.junit4.SpringRunner;
 
 import java.util.Date;
 import java.util.List;
-
-import static org.junit.Assert.*;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -74,5 +73,10 @@ public class MovieRepositoryTest {
         System.out.println(movieList);
     }
 
+    @Test
+    public void findMovieAndAvgScore() {
+        List<Rate> movieAndAvgScore = repository.findMovieAndAvgScore();
+        System.out.println(movieAndAvgScore);
+    }
 
 }

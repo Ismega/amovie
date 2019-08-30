@@ -35,16 +35,44 @@
             <result property="name" column="catName"/>
         </collection>
     </resultMap>
+    <!--    查询电影类型-->
+    <select id="selectCategories" parameterType="int" resultType="Category">
+        SELECT category.* FROM relation LEFT JOIN category
+        ON category.id=relation.category_id WHERE movie_id=#{id}
+    </select>
+
+    <resultMap id="calculateScore" type="Rate">
+        <id property="id" column="id"/>
+        <result property="name" column="name"/>
+        <result property="duration" column="duration"/>
+        <result property="directors" column="directors"/>
+        <result property="actors" column="actors"/>
+        <result property="releaseTime" column="release_time"/>
+        <result property="plot" column="plot"/>
+        <result property="poster" column="poster"/>
+        <result property="country" column="country"/>
+        <result property="status" column="status"/>
+        <result property="score" column="avg_score"/>
+        <result property="count" column="count"/>
+        <collection property="categories" column="id" ofType="Category" select="selectCategories">
+            <id property="id" column="catId"/>
+            <result property="name" column="catName"/>
+        </collection>
+    </resultMap>
+    <select id="findMovieAndAvgScore" resultMap="calculateScore">
+        SELECT movie.*,avg_score, `count` FROM movie
+		LEFT JOIN (SELECT AVG(score.score)
+		as avg_score,movie_id,COUNT(*) as `count`
+		FROM score GROUP BY score.movie_id) as avgscore
+		ON movie.id=avgscore.movie_id
+    </select>
+
 
     <select id="findMovieByUserId" resultMap="findMovieAndCategory" parameterType="int">
         SELECT movie.*,watch.id wid,watch.user_id wuserid FROM movie LEFT JOIN watch
         ON watch.movie_id=movie.id WHERE watch.user_id=#{userId}
     </select>
 
-    <select id="selectCategories" parameterType="int" resultType="Category">
-        SELECT category.* FROM relation LEFT JOIN category
-        ON category.id=relation.category_id WHERE movie_id=#{id};
-    </select>
 
     <select id="findAll" resultMap="findMovieAndCategory">
         select * from movie

@@ -1,24 +1,21 @@
 package com.ecjtu.mega.amovie.controller;
 
-import com.ecjtu.mega.amovie.constant.CommonCode;
-import com.ecjtu.mega.amovie.entity.Movie;
-import com.ecjtu.mega.amovie.entity.Review;
-import com.ecjtu.mega.amovie.entity.Scene;
-import com.ecjtu.mega.amovie.entity.User;
-import com.ecjtu.mega.amovie.exception.CommonException;
-import com.ecjtu.mega.amovie.exception.NotFoundException;
-import com.ecjtu.mega.amovie.form.MovieForm;
-import com.ecjtu.mega.amovie.service.*;
+import com.ecjtu.mega.amovie.entity.*;
+import com.ecjtu.mega.amovie.service.MovieService;
+import com.ecjtu.mega.amovie.service.ReviewService;
+import com.ecjtu.mega.amovie.service.SceneService;
+import com.ecjtu.mega.amovie.service.UserService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
-import org.springframework.beans.BeanUtils;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.util.List;
 
@@ -32,8 +29,6 @@ public class MovieController {
 
     @Autowired
     private MovieService service;
-    @Autowired
-    private CategoryService categoryService;
     @Autowired
     private ReviewService reviewService;
     @Autowired
@@ -90,6 +85,16 @@ public class MovieController {
             return "movie";
         }
         return null;
+    }
+
+    @GetMapping("/rate")
+    public String showRate(Model model,
+                           @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
+                           @RequestParam(value = "size", required = false, defaultValue = "5") Integer size) {
+        PageInfo<Rate> movieAndAvgScore = PageHelper.startPage(page, size).doSelectPageInfo(() -> service.findMovieAndAvgScore());
+        model.addAttribute("movieAndAvgScore", movieAndAvgScore);
+        return "rate";
+
     }
 
     /**

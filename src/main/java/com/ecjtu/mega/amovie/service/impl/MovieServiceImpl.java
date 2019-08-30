@@ -1,6 +1,7 @@
 package com.ecjtu.mega.amovie.service.impl;
 
 import com.ecjtu.mega.amovie.entity.Movie;
+import com.ecjtu.mega.amovie.entity.Rate;
 import com.ecjtu.mega.amovie.exception.CommonException;
 import com.ecjtu.mega.amovie.exception.NotFoundException;
 import com.ecjtu.mega.amovie.repository.MovieRepository;
@@ -125,5 +126,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public List<Movie> findByCountry(String country) {
         return repository.findByCountry(country);
+    }
+
+    @Override
+    public List<Rate> findMovieAndAvgScore() {
+        return repository.findMovieAndAvgScore();
     }
 }

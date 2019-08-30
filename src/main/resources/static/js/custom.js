@@ -845,14 +845,9 @@ function remove(movieId) {
         url: '/api/watch/' + movieId,
         // type:'post',
         method: 'DELETE',
-        contentType: 'application/json',
-        data: {
-            movieId: movieId,
-        },
         dataType: 'json',
         statusCode: {
             200: function () {
-                alert("成功");
                 location.reload();
             },
             400: function () {
@@ -862,6 +857,7 @@ function remove(movieId) {
     });
 
 }
+
 
 function init_MoviePage() {
     "use strict";

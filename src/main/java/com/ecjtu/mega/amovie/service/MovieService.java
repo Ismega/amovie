@@ -1,6 +1,7 @@
 package com.ecjtu.mega.amovie.service;
 
 import com.ecjtu.mega.amovie.entity.Movie;
+import com.ecjtu.mega.amovie.entity.Rate;
 
 import java.util.List;
 
@@ -108,4 +109,11 @@ public interface MovieService {
      * @return
      */
     List<Movie> findByCountry(String country);
+
+    /**
+     * 查询所有电影评分
+     *
+     * @return
+     */
+    List<Rate> findMovieAndAvgScore();
 }

@@ -21,71 +21,30 @@
                             <colgroup class="col-width-sm"></colgroup>
                             <colgroup class="col-width"></colgroup>
 
-                            <tr class="rates rates--top">
-                                <td class="rates__obj">
-                                    <a class="rates__obj-name" href="#"
-                                    >1. Thor: The Dark World</a
-                                    >
-                                </td>
-                                <td class="rates__vote">233 546 评分</td>
-                                <td class="rates__result">5.0</td>
-                                <td class="rates__stars">
-                                    <div class="score"></div>
-                                </td>
-                            </tr>
+                            <div th:each="movieScore:${movieAndAvgScore.list}">
+                                <tr class="rates rates--top">
+                                    <td class="rates__obj">
+                                        <a class="rates__obj-name" href="#" th:text="${movieScore.name}">1. Thor: The
+                                            Dark World</a>
+                                    </td>
+                                    <td class="rates__vote" th:text="${movieScore.count}">233 546 评分</td>
+                                    <td class="rates__result" th:text="${movieScore.score}">5.0</td>
+                                    <td class="rates__stars">
+                                        <div class="score"></div>
+                                    </td>
+                                </tr>
+                            </div>
 
-                            <tr class="rates rates--top">
-                                <td class="rates__obj">
-                                    <a class="rates__obj-name" href="#">2. The Book Thief</a>
-                                </td>
-                                <td class="rates__vote">163 546 评分</td>
-                                <td class="rates__result">5.0</td>
-                                <td class="rates__stars">
-                                    <div class="score"></div>
-                                </td>
-                            </tr>
-
-                            <tr class="rates rates--top">
-                                <td class="rates__obj">
-                                    <a class="rates__obj-name" href="#">3. How I Live Now</a>
-                                </td>
-                                <td class="rates__vote">843 546 votes</td>
-                                <td class="rates__result">4.9</td>
-                                <td class="rates__stars">
-                                    <div class="score"></div>
-                                </td>
-                            </tr>
-
-                            <tr class="rates">
-                                <td class="rates__obj">
-                                    <a class="rates__obj-name" href="#"
-                                    >4. The Armstrong Lie</a
-                                    >
-                                </td>
-                                <td class="rates__vote">3 598 votes</td>
-                                <td class="rates__result">4.9</td>
-                                <td class="rates__stars">
-                                    <div class="score"></div>
-                                </td>
-                            </tr>
-
-                            <tr class="rates">
-                                <td class="rates__obj">
-                                    <a class="rates__obj-name" href="#">5. Ender's Game</a>
-                                </td>
-                                <td class="rates__vote">14 641 votes</td>
-                                <td class="rates__result">4.8</td>
-                                <td class="rates__stars">
-                                    <div class="score"></div>
-                                </td>
-                            </tr>
                         </table>
                     </div>
 
                     <div class="pagination paginatioon--full coloum-wrapper">
-                        <a class="pagination__prev" href="#">prev</a>
-                        <a class="pagination__next" href="#">next</a>
+                        <a class="pagination__prev" th:href="@{/movies/rate(page=${movieAndAvgScore.pageNum}-1)}"
+                           th:if="${movieAndAvgScore.hasPreviousPage}">prev</a>
+                        <a class="pagination__next" th:href="@{/movies/rate(page=${movieAndAvgScore.pageNum}+1)}"
+                           th:if="${movieAndAvgScore.hasPreviousPage}">next</a>
                     </div>
+
                 </div>
             </div>
         </div>

@@ -17,4 +17,6 @@ public interface RateRepository {
      */
     @Insert("insert into score () values()")
     int insert(Score score);
+
+
 }

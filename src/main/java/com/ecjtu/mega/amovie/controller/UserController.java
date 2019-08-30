@@ -60,6 +60,7 @@ public class UserController {
     }
 
     @PostMapping(value = "/register", consumes = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    @ResponseBody
     public ResponseEntity register(@RequestBody @Valid UserForm userForm, BindingResult bindingResult) {
         if (bindingResult.hasErrors()) {
             bindingResult.getFieldError().getDefaultMessage();
@@ -83,4 +84,5 @@ public class UserController {
         session.invalidate();
         return "redirect:/";
     }
+
 }

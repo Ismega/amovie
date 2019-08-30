@@ -1,6 +1,7 @@
 package com.ecjtu.mega.amovie.repository;
 
 import com.ecjtu.mega.amovie.entity.Movie;
+import com.ecjtu.mega.amovie.entity.Rate;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Repository;
 
@@ -118,4 +119,11 @@ public interface MovieRepository {
      * @return
      */
     List<Movie> findByCountry(String country);
+
+    /**
+     * 查询电影和计算平均分
+     *
+     * @return
+     */
+    List<Rate> findMovieAndAvgScore();
 }
