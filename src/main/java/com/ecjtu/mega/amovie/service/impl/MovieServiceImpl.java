@@ -132,4 +132,14 @@ public class MovieServiceImpl implements MovieService {
     public List<Rate> findMovieAndAvgScore() {
         return repository.findMovieAndAvgScore();
     }
+
+    @Override
+    public List<Rate> findMovieAndAvgScoreSort() {
+        return repository.findMovieAndAvgScoreSort();
+    }
+
+    @Override
+    public Rate findMovieAndAvgScoreByMovieId(Integer movieId) {
+        return repository.findMovieAndAvgScoreByMovieId(movieId);
+    }
 }

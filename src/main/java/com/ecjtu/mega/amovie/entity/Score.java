@@ -11,6 +11,9 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+/**
+ * 评分
+ */
 public class Score {
 
     private Integer id;
@@ -18,9 +21,4 @@ public class Score {
     private Integer userId;
     private Integer score;
 
-    public Score(Integer movieId, Integer userId, Integer score) {
-        this.movieId = movieId;
-        this.userId = userId;
-        this.score = score;
-    }
 }

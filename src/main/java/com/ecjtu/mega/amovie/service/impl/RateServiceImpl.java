@@ -20,4 +20,9 @@ public class RateServiceImpl implements RateService {
     public int insert(Score score) {
         return repository.insert(score);
     }
+
+    @Override
+    public Score findByUserIdAndMovieId(Integer userId, Integer movieId) {
+        return repository.findByUserIdAndMovieId(userId, movieId);
+    }
 }

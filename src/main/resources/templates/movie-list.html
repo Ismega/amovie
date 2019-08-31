@@ -114,46 +114,46 @@
                 <div class="movie movie--preview movie--full release">
                     <div class="col-sm-3 col-md-2 col-lg-2">
                         <div class="movie__images">
-                            <img alt="" th:src="${movie.getPoster()}"/>
+                            <img alt="" th:src="${movie.poster}"/>
                         </div>
                         <!-- 评论数 -->
                         <div class="movie__feature">
-                            <a class="movie__feature-item movie__feature--comment" th:href="'/movies/'+${movie.getId()}"
+                            <a class="movie__feature-item movie__feature--comment" th:href="'/movies/'+${movie.id}"
                                th:text="${movie.name}"></a>
                         </div>
                     </div>
 
                     <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
-                        <a class="movie__title link--huge" th:href="'/movies/'+${movie.getId()}"
-                           th:text="${movie.getName()}"></a>
+                        <a class="movie__title link--huge" th:href="'/movies/'+${movie.id}"
+                           th:text="${movie.name}"></a>
 
-                        <p class="movie__time" th:text="${movie.getDuration()}">103min</p>
+                        <p class="movie__time" th:text="${movie.duration}">103min</p>
 
                         <p class="movie__option">
-                            <strong>Country: </strong><a href="#" th:text="${movie.getCountry()}"></a>
+                            <strong>Country: </strong><a href="#" th:text="${movie.country}"></a>
                         </p>
                         <p class="movie__option">
-                            <strong>Category: </strong><span th:each="c:${movie.getCategories()}">
-                            <a href="#" th:text="${c.getName()}"></a></span>
+                            <strong>Category: </strong><span th:each="c:${movie.categories}">
+                            <a href="#" th:text="${c.name}"></a></span>
                         </p>
                         <p class="movie__option">
                             <strong>Release date: </strong> <a
-                                th:text="${#dates.format(movie.getReleaseTime(),'yyyy-MM-dd')}"></a>
+                                th:text="${#dates.format(movie.releaseTime,'yyyy-MM-dd')}"></a>
                         </p>
                         <p class="movie__option">
-                            <strong>Director: </strong><a href="#" th:text="${movie.getDirectors()}"></a>
+                            <strong>Director: </strong><a href="#" th:text="${movie.directors}"></a>
                         </p>
                         <p class="movie__option">
-                            <strong>Actors: </strong><a href="#" th:text="${movie.getActors()}"></a>,
+                            <strong>Actors: </strong><a href="#" th:text="${movie.actors}"></a>,
                         </p>
 
 
                         <div class="movie__btns">
-                            <a class="btn btn-md btn--warning" th:href="'/book1/'+${movie.getId()}">预订此电影</a>
+                            <a class="btn btn-md btn--warning" th:href="'/book1/'+${movie.id}">预订此电影</a>
 
                             <div th:unless="${session.user == null}">
-                                <input hidden id="watchlist-userId" name="userId" th:value="${session.user.getId()}">
-                                <a class="watchlist" th:onclick="|add(${movie.getId()})|">添加到播放列表</a>
+                                <input hidden id="watchlist-userId" name="userId" th:value="${session.user.id}">
+                                <a class="watchlist" th:onclick="|add(${movie.id})|">添加到播放列表</a>
 
                             </div>
 
@@ -161,9 +161,9 @@
 
                         <div class="preview-footer">
                             <div class="movie__rate">
-                                <div class="score"></div>
-                                <span class="movie__rate-number">170 个评分</span>
-                                <span class="movie__rating">5.0</span>
+                                <div class="score" th:id="|score${movie.id}|"></div>
+                                <span class="movie__rate-number" th:text="|${movie.count}个评分|">170 个评分</span>
+                                <span class="movie__rating" th:text="${movie.score}">5.0</span>
                             </div>
                         </div>
                     </div>
@@ -197,6 +197,19 @@
 <script type="text/javascript">
     $(document).ready(function () {
         init_MovieList();
+    });
+</script>
+<script th:each="movieScore:${movieList}" type="text/javascript">
+    "use strict";
+    $(document).ready(function () {
+        $('#score[[${movieScore.id}]]').raty({
+            width: 130,
+            score: [[${movieScore.score}]],
+            path: '/images/rate/',
+            starOff: 'star-off.svg',
+            starOn: 'star-on.svg',
+            readOnly: true
+        })
     });
 </script>
 </body>

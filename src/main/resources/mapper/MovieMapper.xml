@@ -59,12 +59,31 @@
             <result property="name" column="catName"/>
         </collection>
     </resultMap>
+
+    <!--    查询所有电影评分  不排序-->
     <select id="findMovieAndAvgScore" resultMap="calculateScore">
         SELECT movie.*,avg_score, `count` FROM movie
 		LEFT JOIN (SELECT AVG(score.score)
 		as avg_score,movie_id,COUNT(*) as `count`
 		FROM score GROUP BY score.movie_id) as avgscore
 		ON movie.id=avgscore.movie_id
+    </select>
+    <!--查询所有电影评分 并排序-->
+    <select id="findMovieAndAvgScoreSort" resultMap="calculateScore">
+        SELECT movie.*,avg_score, `count` FROM movie
+		LEFT JOIN (SELECT AVG(score.score)
+		as avg_score,movie_id,COUNT(*) as `count`
+		FROM score GROUP BY score.movie_id) as avgscore
+		ON movie.id=avgscore.movie_id
+		ORDER BY avg_score DESC
+    </select>
+    <select id="findMovieAndAvgScoreByMovieId" resultMap="calculateScore">
+        SELECT movie.*,avg_score, `count` FROM movie
+		LEFT JOIN (SELECT AVG(score.score)
+		as avg_score,movie_id,COUNT(*) as `count`
+		FROM score GROUP BY score.movie_id) as avgscore
+		ON movie.id=avgscore.movie_id
+		where movie.id=#{movieId}
     </select>
 
 

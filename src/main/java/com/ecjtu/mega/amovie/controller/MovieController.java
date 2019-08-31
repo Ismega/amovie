@@ -48,7 +48,10 @@ public class MovieController {
                          @RequestParam(value = "size", required = false, defaultValue = "5") Integer size,
                          Model model) {
 
-        Page<Movie> movies = PageHelper.startPage(page, size).doSelectPage(() -> service.showAll());
+//        Page<Movie> movies = PageHelper.startPage(page, size).
+//        doSelectPage(() -> service.showAll());//查询电影和类别
+        Page<Rate> movies = PageHelper.startPage(page, size).
+                doSelectPage(() -> service.findMovieAndAvgScore());//查询电影和类别和评分
         model.addAttribute("movieList", movies);
         return "movie-list";
     }
@@ -63,7 +66,8 @@ public class MovieController {
     @GetMapping("/{id}")
     public String getById(@PathVariable(value = "id") Integer id,
                           Model model) {
-        Movie movie = service.findById(id);
+//        Movie movie = service.findById(id);//查询电影和类型
+        Rate movie = service.findMovieAndAvgScoreByMovieId(id);//查询电影和类型和评分
         if (movie != null) {
             List<Review> reviews = reviewService.findByMovieId(movie.getId());
             int count = reviewService.findCount(movie.getId());
@@ -84,99 +88,16 @@ public class MovieController {
             model.addAttribute("movie", movie);
             return "movie";
         }
-        return null;
+        return "404";
     }
 
     @GetMapping("/rate")
     public String showRate(Model model,
                            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                            @RequestParam(value = "size", required = false, defaultValue = "5") Integer size) {
-        PageInfo<Rate> movieAndAvgScore = PageHelper.startPage(page, size).doSelectPageInfo(() -> service.findMovieAndAvgScore());
+        PageInfo<Rate> movieAndAvgScore = PageHelper.startPage(page, size).doSelectPageInfo(() -> service.findMovieAndAvgScoreSort());
+        Rate ra = service.findMovieAndAvgScoreByMovieId(10);
         model.addAttribute("movieAndAvgScore", movieAndAvgScore);
         return "rate";
-
     }
-
-    /**
-     * 新增电影
-     *
-     * @param movieForm
-     * @return
-     */
-/*    @PostMapping
-    public ResponseEntity insert(@RequestBody MovieForm movieForm) {
-
-        //MovieForm对象
-        Integer[] categoryIds = movieForm.getCategoryIds();
-        if (categoryIds != null) {
-            Movie movie = new Movie();
-            movie.setName(movieForm.getName());
-            BeanUtils.copyProperties(movieForm, movie);
-            int result = categoryService.insertRelation(movie, categoryIds);
-            if (result != 0) {
-                return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
-            }
-        }
-        throw new CommonException("增加失败");
-    }*/
-
-    /**
-     * 修改电影信息
-     *
-     * @param id
-     * @param movieForm
-     * @return
-     */
-/*    @PutMapping("/{id}")
-    public ResponseEntity update(@PathVariable(value = "id") Integer id,
-                                 @RequestBody MovieForm movieForm) {
-        Movie movie1 = service.findById(id);
-        if (movie1 != null) {
-            Integer[] categoryIds = movieForm.getCategoryIds();
-            if (categoryIds != null) {
-                Movie movie = new Movie();
-                BeanUtils.copyProperties(movieForm, movie);
-                movie.setId(id);
-                int result = categoryService.updateRelation(movie, categoryIds);
-                if (result != 0) {
-                    return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
-                }
-                return ResponseEntity.badRequest().build();
-            }
-        }
-        throw new NotFoundException("资源未找到");
-    }*/
-
-    /**
-     * 删除电影信息
-     *
-     * @param id
-     * @return
-     */
-  /*  @DeleteMapping("/{id}")
-    public ResponseEntity delete(@PathVariable(value = "id") Integer id) {
-        Movie movie = service.findById(id);
-        if (movie != null) {
-            int res = categoryService.deleteRelation(id);
-            if (res != 0) {
-                return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
-            }
-        }
-        throw new NotFoundException("资源未找到");
-    }*/
-
-    /**
-     * 根据类型id查询电影
-     *
-     * @param id
-     * @return
-     */
-  /*  @GetMapping("/category/{id}")
-    public ResponseEntity findByCategoryId(@PathVariable(value = "id") Integer id) {
-        List<Movie> movies = service.findByCategoryId(id);
-        if (movies != null) {
-            return new ResponseEntity(CommonCode.success(), HttpStatus.OK);
-        }
-        throw new NotFoundException("查询失败");
-    }*/
 }

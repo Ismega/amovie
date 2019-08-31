@@ -16,13 +16,17 @@
                 <div class="movie__info">
                     <div class="col-sm-4 col-md-3 movie-mobile">
                         <div class="movie__images">
-                            <span class="movie__rating">5.0</span>
+                            <span class="movie__rating" th:text="${movie.score}">5.0</span>
                             <img alt="" th:src="${movie.getPoster()}"/>
                         </div>
+
                         <div class="movie__rate">
                             Your vote:
-                            <div class="score" id="score"></div>
+                            <div class="score" id="scoreMovie">
+                                <input hidden id="rate-movie-id" th:value="${movie.id}">
+                            </div>
                         </div>
+
                     </div>
 
                     <div class="col-sm-8 col-md-9">
@@ -30,7 +34,7 @@
                         <p class="movie__option">
                             <strong>国家: </strong><a href="" th:text="${movie.getCountry()}"></a>
                         </p>
-                        <p class="movie__option"><!--#strings.substring(movie.getReleaseTime(),24,28)-->
+                        <p class="movie__option">
                             <strong>年份: </strong><a href=""
                                                     th:text="${movie.getReleaseTime().getYear()}"></a>
                         </p>
@@ -48,7 +52,7 @@
                             <strong>演员: </strong>
                             <a href="" th:text="${movie.actors}"></a>
 
-                        <p><a class="comment-link" href="" th:text="${count}">评论: 15</a></p>
+                        <p><a class="comment-link" href="" th:text="|${count}个评论|">评论: 15</a></p>
                         </p>
 
                         <div class="movie__btns">
@@ -59,8 +63,6 @@
                                 <a class="watchlist" th:onclick="|add(${movie.getId()})|">添加到播放列表</a>
 
                             </div>
-
-                            <!--th:href="@{/watch(userId=${session.user.getId()},movieId=${movie.getId()})}"-->
 
                         </div>
                     </div>
@@ -117,21 +119,6 @@
                         </div>
                         <!-- 评论结束 -->
 
-
-                        <!-- 回复提示框的展开，在custom.js 1069行 -->
-                        <!-- 评论回复 -->
-                        <!-- <div class="comment comment&#45;&#45;answer">
-                             <a class="comment__author" href="#">Dmitriy Pustovalov</a>
-                             <p class="comment__date">today | 10:19</p>
-                             <p class="comment__message">
-                                 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut
-                                 vitae enim sollicitudin, euismod erat id, fringilla lacus.
-                                 Cras ut rutrum lectus. Etiam ante justo, volutpat at viverra
-                                 a, mattis in velit. Morbi molestie rhoncus enim, vitae
-                                 sagittis dolor tristique et.
-                             </p>
-                             <a class="comment__reply" href="#">Reply</a>
-                         </div>-->
                         <!-- 回复结束 -->
                     </div>
                 </div>

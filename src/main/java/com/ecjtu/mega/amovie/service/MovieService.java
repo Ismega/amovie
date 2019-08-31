@@ -116,4 +116,14 @@ public interface MovieService {
      * @return
      */
     List<Rate> findMovieAndAvgScore();
+
+
+    Rate findMovieAndAvgScoreByMovieId(Integer movieId);
+
+    /**
+     * 查询所有电影评分 并排序
+     *
+     * @return
+     */
+    List<Rate> findMovieAndAvgScoreSort();
 }

@@ -25,7 +25,8 @@
                 </div>
 
                 <div class="col-sm-9 col-md-10 col-lg-10 movie__about">
-                    <a class="movie__title link--huge" href="movie.html" th:text="${movie.name}"></a>
+                    <a class="movie__title link--huge" th:href="'/movies/'+${movie.id}"
+                       th:text="${movie.name}"></a>
 
                     <p class="movie__time" th:text="${movie.duration}"></p>
 
@@ -54,7 +55,6 @@
                         <input hidden id="watchlistMovieId" name="movieId" th:value="${movie.id}">
 
                         <a class="watchlist watch-remove" th:onclick="|remove(${movie.id})|">从播放列表移除</a>
-                        <!--th:href="@{/watch(userId=${session.user.getId()},movieId=${movie.getId()})}"-->
 
                     </div>
 

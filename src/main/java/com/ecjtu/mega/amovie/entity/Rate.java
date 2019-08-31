@@ -9,6 +9,10 @@ import java.util.List;
  * @author mega
  * @date 2019-08-30 10:32
  */
+
+/**
+ * 排行榜
+ */
 @Data
 public class Rate {
 
@@ -42,7 +46,7 @@ public class Rate {
     /**
      * 评分
      */
-    private Double score;
+    private Double score = 0.0;
 
     /**
      * 评论数量

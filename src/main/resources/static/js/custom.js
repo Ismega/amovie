@@ -735,9 +735,9 @@ function init_MovieList() {
         e.preventDefault();
         var searchContent = $('.search__field').val().replace(/\s+/g, "");
         var selected = $('#search-sort').val();
-        var data = {
+        /*var data = {
             searchContent: searchContent,
-        };
+        };*/
         window.location.href = '/search/' + selected + '/' + searchContent;
 
     });
@@ -872,6 +872,37 @@ function init_MoviePage() {
         starOn: 'star-on.svg'
     });
 
+    //2. 评分
+    $('#scoreMovie').click(function () {
+        var movieId = $('#rate-movie-id').val();
+        var rate = $('#scoreMovie').raty('score');
+        var data = {
+            movieId: movieId,
+            score: rate,
+        }
+        $.ajax({
+            url: '/api/rate',
+            method: 'POST',
+            contentType: 'application/json',
+            data: JSON.stringify(data),
+            dataType: 'json',
+            statusCode: {
+                200: function () {
+                    alert("感谢你的评分");
+                    location.reload();
+                },
+                400: function () {
+                    alert("您已评过分");
+
+                },
+                404: function () {
+                    alert("请先登录");
+                }
+            },
+        });
+        //
+    });
+
 
     //4. Dropdown init 
     //select
@@ -943,6 +974,7 @@ function init_MoviePage() {
     });
 }
 
+//评分
 function init_Rates() {
     "use strict";
 
@@ -957,9 +989,7 @@ function init_Rates() {
     });
 
     //After rate callback
-    $('.score').click(function () {
-        $(this).html('<span class="rates__done">感谢您的评分<span>')
-    })
+    // $(this).html('<span class="rates__done">感谢您的评分<span>')
 }
 
 function init_SinglePage() {

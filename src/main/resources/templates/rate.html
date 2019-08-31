@@ -21,20 +21,22 @@
                             <colgroup class="col-width-sm"></colgroup>
                             <colgroup class="col-width"></colgroup>
 
-                            <div th:each="movieScore:${movieAndAvgScore.list}">
-                                <tr class="rates rates--top">
-                                    <td class="rates__obj">
-                                        <a class="rates__obj-name" href="#" th:text="${movieScore.name}">1. Thor: The
-                                            Dark World</a>
-                                    </td>
-                                    <td class="rates__vote" th:text="${movieScore.count}">233 546 评分</td>
-                                    <td class="rates__result" th:text="${movieScore.score}">5.0</td>
-                                    <td class="rates__stars">
-                                        <div class="score"></div>
-                                    </td>
-                                </tr>
-                            </div>
+                            <tr class="rates rates--top"
+                                th:class="${(rate.index+1 +((movieAndAvgScore.pageNum)-1)*movieAndAvgScore.size)<4 ? 'rates rates--top':'rates'}"
+                                th:each="movieScore,rate:${movieAndAvgScore.list}">
+                                <td class="rates__obj">
+                                    <a class="rates__obj-name"
+                                       th:href="'/movies/'+${movieScore.id}"
+                                       th:text="${(rate.index+1 +((movieAndAvgScore.pageNum)-1)*movieAndAvgScore.size)
+                                       +' .  '+movieScore.name}"></a>
+                                </td>
+                                <td class="rates__vote" th:text="${movieScore.count}">233 546 评分</td>
+                                <td class="rates__result" th:text="${#strings.substring(movieScore.score,0,3)}">5.0</td>
+                                <td class="rates__stars">
 
+                                    <div class="score" th:id="|score${movieScore.id}|"></div>
+                                </td>
+                            </tr>
                         </table>
                     </div>
 
@@ -42,9 +44,9 @@
                         <a class="pagination__prev" th:href="@{/movies/rate(page=${movieAndAvgScore.pageNum}-1)}"
                            th:if="${movieAndAvgScore.hasPreviousPage}">prev</a>
                         <a class="pagination__next" th:href="@{/movies/rate(page=${movieAndAvgScore.pageNum}+1)}"
-                           th:if="${movieAndAvgScore.hasPreviousPage}">next</a>
-                    </div>
+                           th:if="${movieAndAvgScore.hasNextPage}">next</a>
 
+                    </div>
                 </div>
             </div>
         </div>
@@ -65,6 +67,19 @@
 <script type="text/javascript">
     $(document).ready(function () {
         init_Rates();
+    });
+</script>
+<script th:each="movieScore:${movieAndAvgScore.list}" type="text/javascript">
+    "use strict";
+    $(document).ready(function () {
+        $('#score[[${movieScore.id}]]').raty({
+            width: 130,
+            score: [[${movieScore.score}]],
+            path: '/images/rate/',
+            starOff: 'star-off.svg',
+            starOn: 'star-on.svg',
+            readOnly: true
+        })
     });
 </script>
 </body>

@@ -126,4 +126,17 @@ public interface MovieRepository {
      * @return
      */
     List<Rate> findMovieAndAvgScore();
+
+    /**
+     * @param movieId
+     * @return
+     */
+    Rate findMovieAndAvgScoreByMovieId(Integer movieId);
+
+    /**
+     * 查询电影和计算平均分 并根据评分排序
+     *
+     * @return
+     */
+    List<Rate> findMovieAndAvgScoreSort();
 }
