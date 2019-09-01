@@ -11,8 +11,9 @@
     <section class="container">
         <div class="order-container">
             <div class="order">
-                <img alt='' class="order__images" src="images/tickets.png">
-                <p class="order__title">预订<br><span class="order__descript">祝您观影愉快！</span></p>
+                <img alt='' class="order__images" th:src="${movie.poster}">
+                <p class="order__title">预订:<a class="order__title" th:text="${movie.name}"></a><br><span
+                        class="order__descript">祝您观影愉快！</span></p>
             </div>
         </div>
         <div class="order-step-area">
@@ -28,15 +29,14 @@
                         <p class="time-select__place">Curzon</p>
                     </div>
                     <ul class="col-sm-6 items-wrap">
-                        <li class="time-select__item" data-time='09:00'>09:00</li>
-                        <li class="time-select__item" data-time='11:00'>11:00</li>
-                        <li class="time-select__item" data-time='13:00'>13:00</li>
-                        <li class="time-select__item" data-time='15:00'>15:00</li>
-                        <li class="time-select__item" data-time='17:00'>17:00</li>
-                        <li class="time-select__item" data-time='19:00'>19:00</li>
-                        <li class="time-select__item" data-time='21:00'>21:00</li>
-                        <li class="time-select__item" data-time='23:00'>23:00</li>
-                        <li class="time-select__item" data-time='01:00'>01:00</li>
+                        <div th:each="scene:${sceneList}">
+                            <li class="time-select__item" data-time='09:00'
+                                th:onclick="|choose(${scene.id})|" th:text="${scene.showtime}"></li>
+                            <input hidden id="book-movieId" th:value="${scene.movieId}" type="text"/>
+                            <input hidden id="book-moviePrice" th:value="${scene.price}" type="text"/>
+                            <input hidden id="book-movieShowTime" th:value="${scene.showtime}" type="text"/>
+                        </div>
+
                     </ul>
                 </div>
             </div>
@@ -47,8 +47,8 @@
     <div class="clearfix"></div>
 
     <form action='/book2' class="booking-form" id='film-and-time' method='get'>
-        <input class="choosen-movie" name='choosen-movie' type='text'>
-
+        <input class="choosen-movieId" name='choosen-movie' type='text'>
+        <input class="choosen-moviePrice" name='choosen-movie' type='text'>
         <input class="choosen-city" name='choosen-city' type='text'>
         <input class="choosen-date" name='choosen-date' type='text'>
 

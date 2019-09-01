@@ -15,19 +15,19 @@
                 <h2 class="page-heading">资讯</h2>
 
                 <!-- News post article-->
-                <div th:each="news:${newsPage}">
+                <div th:each="news:${newsPage.list}">
                     <article class="post post--news">
                         <a class="post__image-link" href='news.html'>
                             <img alt='' src="">
                         </a>
 
-                        <h1><a class="post__title-link" href="single-page-full.html" th:text="${news.getTitle()}"></a>
+                        <h1><a class="post__title-link" href="single-page-full.html" th:text="${news.title}"></a>
                         </h1>
-                        <p class="post__date" th:text="${#dates.format(news.getCreateTime(),'yyyy-MM-dd')}"></p>
+                        <p class="post__date" th:text="${#dates.format(news.createTime,'yyyy-MM-dd')}"></p>
 
                         <div class="wave-devider"></div>
 
-                        <p class="post__text" th:text="${news.getContent()}"></p>
+                        <p class="post__text" th:text="${news.content}"></p>
 
                         <div class="devider-huge"></div>
                     </article>
@@ -36,8 +36,12 @@
                 <!-- end news post article-->
 
                 <div class="pagination">
-                    <a class="pagination__prev" th:href="@{/newsList(page=${newsPage.pageNum}-1)}">prev</a>
-                    <a class="pagination__next" th:href="@{/newsList(page=${newsPage.pageNum}+1)}">next</a>
+                    <a class="pagination__prev"
+                       th:href="@{/newsList(page=${newsPage.pageNum}-1)}"
+                       th:if="${newsPage.hasPreviousPage}">prev</a>
+                    <a class="pagination__next"
+                       th:href="@{/newsList(page=${newsPage.pageNum}+1)}"
+                       th:if="${newsPage.hasNextPage}">next</a>
                 </div>
 
             </div>

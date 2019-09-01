@@ -99,7 +99,7 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public List<Movie> findByStatus(Integer status) {
+    public List<Rate> findByStatus(Integer status) {
         return repository.findByStatus(status);
     }
 
@@ -141,5 +141,10 @@ public class MovieServiceImpl implements MovieService {
     @Override
     public Rate findMovieAndAvgScoreByMovieId(Integer movieId) {
         return repository.findMovieAndAvgScoreByMovieId(movieId);
+    }
+
+    @Override
+    public List<Rate> findMovieAndAvgScoreByUserId(Integer userId) {
+        return repository.findMovieAndAvgScoreByUserId(userId);
     }
 }

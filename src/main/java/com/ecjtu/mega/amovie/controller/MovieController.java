@@ -1,6 +1,9 @@
 package com.ecjtu.mega.amovie.controller;
 
-import com.ecjtu.mega.amovie.entity.*;
+import com.ecjtu.mega.amovie.entity.Rate;
+import com.ecjtu.mega.amovie.entity.Review;
+import com.ecjtu.mega.amovie.entity.Scene;
+import com.ecjtu.mega.amovie.entity.User;
 import com.ecjtu.mega.amovie.service.MovieService;
 import com.ecjtu.mega.amovie.service.ReviewService;
 import com.ecjtu.mega.amovie.service.SceneService;
@@ -48,8 +51,8 @@ public class MovieController {
                          @RequestParam(value = "size", required = false, defaultValue = "5") Integer size,
                          Model model) {
 
-//        Page<Movie> movies = PageHelper.startPage(page, size).
-//        doSelectPage(() -> service.showAll());//查询电影和类别
+        /*Page<Movie> movies = PageHelper.startPage(page, size).
+                doSelectPage(() -> service.showAll());//查询电影和类别*/
         Page<Rate> movies = PageHelper.startPage(page, size).
                 doSelectPage(() -> service.findMovieAndAvgScore());//查询电影和类别和评分
         model.addAttribute("movieList", movies);
@@ -96,7 +99,6 @@ public class MovieController {
                            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                            @RequestParam(value = "size", required = false, defaultValue = "5") Integer size) {
         PageInfo<Rate> movieAndAvgScore = PageHelper.startPage(page, size).doSelectPageInfo(() -> service.findMovieAndAvgScoreSort());
-        Rate ra = service.findMovieAndAvgScoreByMovieId(10);
         model.addAttribute("movieAndAvgScore", movieAndAvgScore);
         return "rate";
     }

@@ -79,8 +79,7 @@ public interface MovieRepository {
      * @param status
      * @return
      */
-    @Select("select * from movie where status=#{status}")
-    List<Movie> findByStatus(Integer status);
+    List<Rate> findByStatus(Integer status);
 
     /**
      * 观看列表根据用户id查询电影列表
@@ -132,6 +131,12 @@ public interface MovieRepository {
      * @return
      */
     Rate findMovieAndAvgScoreByMovieId(Integer movieId);
+
+    /**
+     * @param userId
+     * @return
+     */
+    List<Rate> findMovieAndAvgScoreByUserId(Integer userId);
 
     /**
      * 查询电影和计算平均分 并根据评分排序

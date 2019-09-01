@@ -21,7 +21,7 @@
                         </div>
 
                         <div class="movie__rate">
-                            Your vote:
+                            请输入你的评分:
                             <div class="score" id="scoreMovie">
                                 <input hidden id="rate-movie-id" th:value="${movie.id}">
                             </div>
@@ -36,7 +36,7 @@
                         </p>
                         <p class="movie__option">
                             <strong>年份: </strong><a href=""
-                                                    th:text="${movie.getReleaseTime().getYear()}"></a>
+                                                    th:text="${#dates.format(movie.releaseTime,'yyyy')}"></a>
                         </p>
                         <p class="movie__option">
                             <strong>类别: </strong><a href="" th:each="c : ${movie.getCategories()}"

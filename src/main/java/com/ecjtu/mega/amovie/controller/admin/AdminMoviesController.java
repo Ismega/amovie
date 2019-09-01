@@ -3,6 +3,7 @@ package com.ecjtu.mega.amovie.controller.admin;
 import com.ecjtu.mega.amovie.constant.CommonCode;
 import com.ecjtu.mega.amovie.constant.Status;
 import com.ecjtu.mega.amovie.entity.Movie;
+import com.ecjtu.mega.amovie.entity.Rate;
 import com.ecjtu.mega.amovie.exception.CommonException;
 import com.ecjtu.mega.amovie.exception.NotFoundException;
 import com.ecjtu.mega.amovie.form.MovieForm;
@@ -148,7 +149,7 @@ public class AdminMoviesController {
      */
     @GetMapping("/released")
     public ResponseEntity findByReleased() {
-        List<Movie> movies = service.findByStatus(Status.ON);
+        List<Rate> movies = service.findByStatus(Status.ON);
         return new ResponseEntity(movies, HttpStatus.OK);
     }
 

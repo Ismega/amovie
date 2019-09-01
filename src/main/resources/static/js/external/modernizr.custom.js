@@ -939,7 +939,7 @@ window.Modernizr = (function (window, document, undefined) {
         var e = b.createElement("link"), j, c = i ? h : c || f;
         e.href = a, e.rel = "stylesheet", e.type = "text/css";
         for (j in d) e.setAttribute(j, d[j]);
-        g || (n.parentNode.insertBefore(e, n), m(c, 0))
+        g || (n.parentNode.insertBefore(e, n), m(c, 0));
     }
 })(this, document);
 Modernizr.load = function () {

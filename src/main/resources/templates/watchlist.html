@@ -13,14 +13,14 @@
         <div class="col-sm-12">
 
             <!-- Movie preview item -->
-            <div class="movie movie--preview movie--full release" th:each="movie:${movieByUserIdList.getList()}">
+            <div class="movie movie--preview movie--full release" th:each="movie:${movieByUserIdList.list}">
                 <div class="col-sm-3 col-md-2 col-lg-2">
                     <div class="movie__images">
                         <img alt="" th:src="${movie.poster}"/>
                     </div>
                     <!-- 评论数 -->
                     <div class="movie__feature">
-                        <a class="movie__feature-item movie__feature--comment" href="#">123</a>
+                        <a class="movie__feature-item movie__feature--comment" href="" th:text="${movie.name}">123</a>
                     </div>
                 </div>
 
@@ -60,9 +60,9 @@
 
                     <div class="preview-footer">
                         <div class="movie__rate">
-                            <div class="score"></div>
-                            <span class="movie__rate-number">170 个评分</span>
-                            <span class="movie__rating">5.0</span>
+                            <div class="score" th:id="|score${movie.id}|"></div>
+                            <span class="movie__rate-number" th:text="|${movie.count}个评分|">170 </span>
+                            <span class="movie__rating" th:text="${movie.score}">5.0</span>
                         </div>
                     </div>
                 </div>
@@ -95,6 +95,19 @@
 <script type="text/javascript">
     $(document).ready(function () {
         init_MovieList();
+    });
+</script>
+<script th:each="movieScore:${movieByUserIdList.list}" type="text/javascript">
+    "use strict";
+    $(document).ready(function () {
+        $('#score[[${movieScore.id}]]').raty({
+            width: 130,
+            score: [[${movieScore.score}]],
+            path: '/images/rate/',
+            starOff: 'star-off.svg',
+            starOn: 'star-on.svg',
+            readOnly: true
+        })
     });
 </script>
 </body>

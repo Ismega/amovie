@@ -1,6 +1,7 @@
 package com.ecjtu.mega.amovie.controller;
 
 import com.ecjtu.mega.amovie.entity.Movie;
+import com.ecjtu.mega.amovie.entity.Rate;
 import com.ecjtu.mega.amovie.entity.User;
 import com.ecjtu.mega.amovie.service.MovieService;
 import com.github.pagehelper.PageHelper;
@@ -39,7 +40,8 @@ public class WatchController {
                         Model model,
                         HttpSession session) {
         User user = (User) session.getAttribute("user");
-        PageInfo<Movie> movieByUserIdList = PageHelper.startPage(page, size).doSelectPageInfo(() -> movieService.findMovieByUserId(user.getId()));
+        PageInfo<Rate> movieByUserIdList = PageHelper.startPage(page, size).
+                doSelectPageInfo(() -> movieService.findMovieAndAvgScoreByUserId(user.getId()));
         if (movieByUserIdList != null) {
             model.addAttribute("movieByUserIdList", movieByUserIdList);
             return "watchlist";

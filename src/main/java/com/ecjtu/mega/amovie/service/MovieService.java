@@ -70,7 +70,7 @@ public interface MovieService {
      *
      * @return
      */
-    List<Movie> findByStatus(Integer status);
+    List<Rate> findByStatus(Integer status);
 
     /**
      * 根据用户id查
@@ -119,6 +119,8 @@ public interface MovieService {
 
 
     Rate findMovieAndAvgScoreByMovieId(Integer movieId);
+
+    List<Rate> findMovieAndAvgScoreByUserId(Integer userId);
 
     /**
      * 查询所有电影评分 并排序

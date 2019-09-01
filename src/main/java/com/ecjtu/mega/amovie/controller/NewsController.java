@@ -5,6 +5,7 @@ import com.ecjtu.mega.amovie.exception.NotFoundException;
 import com.ecjtu.mega.amovie.service.NewService;
 import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -37,7 +38,7 @@ public class NewsController {
     public String getAll(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                          @RequestParam(value = "size", required = false, defaultValue = "1") Integer size,
                          Model model) {
-        Page<News> newsPage = PageHelper.startPage(page, size).doSelectPage(() -> service.showAll());
+        PageInfo<News> newsPage = PageHelper.startPage(page, size).doSelectPageInfo(() -> service.showAll());
         model.addAttribute("newsPage", newsPage);
         return "news-list";
     }
