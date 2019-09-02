@@ -29,13 +29,14 @@
                         <p class="time-select__place">Curzon</p>
                     </div>
                     <ul class="col-sm-6 items-wrap">
-                        <div th:each="scene:${sceneList}">
+                        <span th:each="scene:${sceneList}">
                             <li class="time-select__item" data-time='09:00'
                                 th:onclick="|choose(${scene.id})|" th:text="${scene.showtime}"></li>
+                            <!--                            <input hidden id="book-sceneId" th:value="${scene.id}" type="text"/>-->
                             <input hidden id="book-movieId" th:value="${scene.movieId}" type="text"/>
                             <input hidden id="book-moviePrice" th:value="${scene.price}" type="text"/>
                             <input hidden id="book-movieShowTime" th:value="${scene.showtime}" type="text"/>
-                        </div>
+                        </span>
 
                     </ul>
                 </div>
@@ -46,14 +47,16 @@
 
     <div class="clearfix"></div>
 
-    <form action='/book2' class="booking-form" id='film-and-time' method='get'>
+    <form action="/bookTicket2" class="booking-form" id='film-and-time' method='get'>
         <input class="choosen-movieId" name='choosen-movie' type='text'>
-        <input class="choosen-moviePrice" name='choosen-movie' type='text'>
-        <input class="choosen-city" name='choosen-city' type='text'>
+        <input class="choosen-sceneId" name='choosen-scene' type='text'>
+        <input class="choosen-moviePrice" name='choosen-moviePrice' type='text'>
+        <input class="choosen-time" name='choosen-time' type='text'>
+        <!--<input class="choosen-city" name='choosen-city' type='text'>
         <input class="choosen-date" name='choosen-date' type='text'>
 
-        <input class="choosen-cinema" name='choosen-cinema' type='text'>
-        <input class="choosen-time" name='choosen-time' type='text'>
+        <input class="choosen-cinema" name='choosen-cinema' type='text'>-->
+
 
 
         <div class="booking-pagination">
@@ -61,12 +64,11 @@
                 <span class="arrow__text arrow--prev"></span>
                 <span class="arrow__info"></span>
             </a>
-            <a class="booking-pagination__next" href="/book2">
+            <a class="booking-pagination__next" href="#">
                 <span class="arrow__text arrow--next">下一步</span>
                 <span class="arrow__info">选择座位</span>
             </a>
         </div>
-
     </form>
 
     <div class="clearfix"></div>

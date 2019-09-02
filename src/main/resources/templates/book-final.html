@@ -26,19 +26,22 @@
 
                         <div class="ticket-secondary">
                             <span class="ticket__item">Ticket number <strong
-                                    class="ticket__number">a126bym4</strong></span>
-                            <span class="ticket__item ticket__date">25/10/2013</span>
-                            <span class="ticket__item ticket__time">17:45</span>
-                            <span class="ticket__item">Cinema: <span class="ticket__cinema">Cineworld</span></span>
-                            <span class="ticket__item">Hall: <span class="ticket__hall">Visconti</span></span>
+                                    class="ticket__number" th:text="${order.ticketNum}"></strong></span>
+                            <span class="ticket__item ticket__date"
+                                  th:text="${#dates.format(order.createTime,'yyyy-mm-dd')}"></span>
+                            <span class="ticket__item ticket__time"
+                                  th:text="${#dates.format(order.createTime,'hh:mm')}"></span>
+                            <span class="ticket__item">Cinema: <span class="ticket__cinema">铜锣湾</span></span>
+                            <span class="ticket__item">Hall: <span class="ticket__hall">普通大厅</span></span>
                             <span class="ticket__item ticket__price">price: <strong
-                                    class="ticket__cost">$60</strong></span>
+                                    class="ticket__cost">$ <span th:text="${order.totalPrice}"></span></strong></span>
                         </div>
 
                         <div class="ticket-primery">
                             <span class="ticket__item ticket__item--primery ticket__film">Film<br><strong
-                                    class="ticket__movie">The Fifth Estate (2013)</strong></span>
-                            <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place">11F, 12F, 13F</span></span>
+                                    class="ticket__movie"></strong></span>
+                            <span class="ticket__item ticket__item--primery">Sits: <span class="ticket__place"
+                                                                                         th:text="${order.seat}"></span></span>
                         </div>
 
 

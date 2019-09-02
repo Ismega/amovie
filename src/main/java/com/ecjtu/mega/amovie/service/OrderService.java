@@ -1,6 +1,7 @@
 package com.ecjtu.mega.amovie.service;
 
 import com.ecjtu.mega.amovie.entity.Order;
+import org.apache.ibatis.annotations.Select;
 
 import java.util.List;
 
@@ -47,6 +48,8 @@ public interface OrderService {
      * @return
      */
     int update(Order order);
+
+    Order findByBookedSeat(String bookedSeat);
 
 
 }

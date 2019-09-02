@@ -60,4 +60,7 @@ public interface OrderRepository {
     @Delete("delete from `order` where id=#{id}")
     int delete(Integer id);
 
+    @Select("select * from `order` where seat=#{bookedSeat}")
+    Order findByBookedSeat(String bookedSeat);
+
 }

@@ -3,6 +3,7 @@ package com.ecjtu.mega.amovie.service.impl;
 import com.ecjtu.mega.amovie.entity.Order;
 import com.ecjtu.mega.amovie.repository.OrderRepository;
 import com.ecjtu.mega.amovie.service.OrderService;
+import com.sun.org.apache.xpath.internal.operations.Or;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,4 +42,11 @@ public class OrderServiceImpl implements OrderService {
     public int update(Order order) {
         return repository.update(order);
     }
+
+    @Override
+    public Order findByBookedSeat(String bookedSeat) {
+        return repository.findByBookedSeat(bookedSeat);
+    }
+
+
 }
