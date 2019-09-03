@@ -101,7 +101,7 @@
                 </a>
                 <ul class="auth__function">
                     <li><a class="auth__function-item" href="/watch">观看列表</a></li>
-                    <li><a class="auth__function-item" href="/ticket">已预定的电影票</a></li>
+                    <li><a class="auth__function-item" th:href="'/bookTicket/'+${session.user.id}">已预定的电影票</a></li>
                     <li><a class="auth__function-item" href="/exit">退出登录</a></li>
                 </ul>
             </div>
@@ -122,8 +122,8 @@
     <section class="container">
         <div class="col-xs-4 col-md-2 footer-nav">
             <ul class="nav-link">
-                <li><a class="nav-link__item" href="/movie-list">电影</a></li>
-                <li><a class="nav-link__item" href="/rate">评分</a></li>
+                <li><a class="nav-link__item" href="/movies">电影</a></li>
+                <li><a class="nav-link__item" href="/movies/rate">评分</a></li>
                 <li><a class="nav-link__item" href="/newsList">资讯</a></li>
             </ul>
         </div>

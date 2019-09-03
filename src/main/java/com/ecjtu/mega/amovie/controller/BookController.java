@@ -5,17 +5,20 @@ import com.ecjtu.mega.amovie.entity.*;
 import com.ecjtu.mega.amovie.service.MovieService;
 import com.ecjtu.mega.amovie.service.OrderService;
 import com.ecjtu.mega.amovie.service.SceneService;
-import com.ecjtu.mega.amovie.vo.OrderVo;
 import com.ecjtu.mega.amovie.vo.TicketVo;
-import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.thymeleaf.util.StringUtils;
 
 import javax.servlet.http.HttpSession;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
+import java.util.UUID;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 /**
  * @author mega
@@ -29,6 +32,23 @@ public class BookController {
     private SceneService sceneService;
     @Autowired
     private OrderService orderService;
+
+    @GetMapping("/bookTicket/{userId}")
+    public String getOrder(Model model,
+                           @PathVariable("userId") Integer userId) {
+        List<Order> byUserId = orderService.findByUserId(userId);
+        if (byUserId != null) {
+            for (Order order : byUserId) {
+                Scene scene = sceneService.findById(order.getSceneId());
+                order.setMovieName(scene.getMovieName());
+                String uuid = UUID.randomUUID().toString();
+                order.setUuid(uuid);
+            }
+            model.addAttribute("orderList", byUserId);
+            return "ticket";
+        }
+        return "404";
+    }
 
     @GetMapping("/book1/{movieId}")
     public String getBook1(@PathVariable(value = "movieId") Integer movieId,
@@ -52,9 +72,17 @@ public class BookController {
         Rate rate = movieService.findMovieAndAvgScoreByMovieId(movieId);
         if (rate != null) {
             Scene scene = sceneService.findById(sceneId);
+            String bookedSeat = scene.getBookedSeat();
+            bookedSeat = bookedSeat.replaceAll(" ", "");
+            String[] split = {};
+            if (!StringUtils.isEmpty(bookedSeat)) {
+                split = Arrays.stream(bookedSeat.split(","))
+                        .map(s -> String.format("\"%s\"", s)).toArray(String[]::new);
+            }
             if (scene != null) {
                 model.addAttribute("scene", scene);
                 model.addAttribute("rate", rate);
+                model.addAttribute("bookedSeat", Arrays.toString(split));
                 return "book2";
             }
         }
@@ -71,16 +99,23 @@ public class BookController {
         return "404";
     }
 
-    //localhost:8080/bookFinal?sceneId=12&ticketNum=2&totalPrice=22&seat=L11,%20L10
-//    ?sceneId={sceneId}&ticketNum={ticketNum}&totalPrice={totalPrice}&seat={seat}
     @GetMapping(value = "/bookFinal")
     public String purchase(Model model, HttpSession session,
                            @RequestParam("sceneId") Integer sceneId,
                            @RequestParam("ticketNum") Integer ticketNum,
                            @RequestParam("seat") String seat,
-                           @RequestParam("totalPrice") Integer totalPrice) {
+                           @RequestParam("totalPrice") Integer totalPrice,
+                           @RequestParam("movieName") String movieName,
+                           @RequestParam("price") Integer price,
+                           @RequestParam("movieId") Integer movieId) {
         User user = (User) session.getAttribute("user");
         if (user != null) {
+            Scene sc = sceneService.findById(sceneId);
+            StringBuilder append = new StringBuilder().append(seat).append(",").append(sc.getBookedSeat());
+            Scene scene = new Scene();
+            scene.setId(sceneId);
+            scene.setBookedSeat(append.toString());
+            int update = sceneService.update(scene);
             Order order = new Order();
             order.setSceneId(sceneId);
             order.setTotalPrice(totalPrice);
@@ -90,7 +125,8 @@ public class BookController {
             order.setStatus(Status.ON);
             order.setCreateTime(new Date());
             int result = orderService.save(order);
-            if (result > 0) {
+            if (result > 0 && update > 0) {
+                model.addAttribute("movieName", movieName);
                 model.addAttribute("order", order);
                 return "book-final";
 

@@ -16,6 +16,7 @@
                     <img alt='' class="order__images" src="images/tickets.png">
                     <p class="order__title">预订
                         <a class="order__title" th:text="${rate.name}"></a>
+                        <input hidden id="movieName" th:value="${rate.name}" type="text"/>
                         <br><span class="order__descript">祝您观影愉快！</span></p>
                 </div>
             </div>
@@ -30,6 +31,7 @@
                         <li class="sits-price marker--none"><strong>价格</strong></li>
                         <li class="sits-price sits-price--cheap" th:text="${scene.price}"></li>
                         <input hidden id="moviePrice" th:value="${scene.price}" type="text"/>
+                        <input hidden id="movieId" th:value="${rate.id}" type="text"/>
                         <input hidden id="sceneId" th:value="${scene.id}" type="text"/>
 
                     </ul>
@@ -332,6 +334,9 @@
         <input class="choosen-price" name='price' type='text'>
         <input class="choosen-sits" name='sits' type='text'>
         <input class="choosen-scene" name='sceneId' type='text'>
+        <input class="choosen-movieName" name='movieName' type='text'>
+        <input class="choosen-movieId" name='movieId' type='text'>
+        <input class="choosen-movieId" name='movieId' type='text'>
 
 
         <div class="booking-pagination booking-pagination--margin">
@@ -346,6 +351,7 @@
         </div>
     </form>
 
+
     <div class="clearfix"></div>
 
     <div th:replace="~{/fragment/common-fragment :: footer}"></div>
@@ -356,10 +362,16 @@
 
 <!-- JavaScript-->
 <div th:replace="~{/fragment/common-fragment :: script}"></div>
-
+<input hidden id="bookSeated" th:value="${bookedSeat}" type="text"/>
 <script type="text/javascript">
     $(document).ready(function () {
         init_BookingTwo();
+        var s = JSON.parse($('#bookSeated').val());
+        $('span').filter(function () {
+            var sits = $(this).attr('data-place');
+            var res = $.inArray(sits, s) != -1;
+            return res;
+        }).addClass('sits-state--not');
     });
 </script>
 

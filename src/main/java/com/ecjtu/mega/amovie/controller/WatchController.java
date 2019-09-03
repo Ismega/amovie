@@ -36,16 +36,16 @@ public class WatchController {
      */
     @GetMapping
     public String Watch(@RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
-                        @RequestParam(value = "size", required = false, defaultValue = "3") Integer size,
+                        @RequestParam(value = "size", required = false, defaultValue = "20") Integer size,
                         Model model,
                         HttpSession session) {
         User user = (User) session.getAttribute("user");
-        PageInfo<Rate> movieByUserIdList = PageHelper.startPage(page, size).
-                doSelectPageInfo(() -> movieService.findMovieAndAvgScoreByUserId(user.getId()));
+        PageInfo<Movie> movieByUserIdList = PageHelper.startPage(page, size).
+                doSelectPageInfo(() -> movieService.findMovieByUserId(user.getId()));
         if (movieByUserIdList != null) {
             model.addAttribute("movieByUserIdList", movieByUserIdList);
             return "watchlist";
         }
-        return null;
+        return "404";
     }
 }

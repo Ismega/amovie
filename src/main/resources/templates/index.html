@@ -88,15 +88,15 @@
                 <aside class="col-sm-4 col-md-3">
                     <div class="sitebar first-banner--left">
                         <div class="banner-wrap first-banner--left">
-                            <img alt="banner" src="http://placehold.it/500x500"/>
+                            <img alt="banner" src="/images/18.jpg"/>
                         </div>
 
                         <div class="banner-wrap">
-                            <img alt="banner" src="http://placehold.it/500x500"/>
+                            <img alt="banner" src="/images/16.jpg"/>
                         </div>
 
                         <div class="banner-wrap banner-wrap--last">
-                            <img alt="banner" src="http://placehold.it/500x500"/>
+                            <img alt="banner" src="/images/17.jpg"/>
                         </div>
                     </div>
                 </aside>
@@ -112,7 +112,7 @@
             <div class="col-sm-4 similar-wrap col--remove" th:each="news:${newsList.list}">
                 <div class="post post--preview post--preview--wide">
                     <div class="post__image">
-                        <img alt="" src="http://placehold.it/270x330"/>
+                        <img alt="" src="/images/6.jpg"/>
                     </div>
                     <p class="post__date" th:text="${#dates.format(news.getCreateTime(),'yyyy-mm-dd')}"></p>
                     <a class="post__title" href="news.html" th:text="${news.getTitle()}"></a>

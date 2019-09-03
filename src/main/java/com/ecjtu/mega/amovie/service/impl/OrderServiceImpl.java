@@ -48,5 +48,8 @@ public class OrderServiceImpl implements OrderService {
         return repository.findByBookedSeat(bookedSeat);
     }
 
-
+    @Override
+    public List<Order> findByUserId(Integer userId) {
+        return repository.findByUserId(userId);
+    }
 }

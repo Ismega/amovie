@@ -31,6 +31,8 @@ public class Order {
      * 当前用户预定的座位号
      */
     private String seat;
+    private String movieName;
+    private String uuid;
 
     public Order(Integer status, Integer userId, Date createTime,
                  Integer sceneId, Integer ticketNum, Integer totalPrice, String seat) {
@@ -42,4 +44,5 @@ public class Order {
         this.totalPrice = totalPrice;
         this.seat = seat;
     }
+
 }

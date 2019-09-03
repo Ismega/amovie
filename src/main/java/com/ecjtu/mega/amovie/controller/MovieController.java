@@ -98,7 +98,8 @@ public class MovieController {
     public String showRate(Model model,
                            @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                            @RequestParam(value = "size", required = false, defaultValue = "5") Integer size) {
-        PageInfo<Rate> movieAndAvgScore = PageHelper.startPage(page, size).doSelectPageInfo(() -> service.findMovieAndAvgScoreSort());
+        PageInfo<Rate> movieAndAvgScore = PageHelper.startPage(page, size).doSelectPageInfo(() ->
+                service.findMovieAndAvgScoreSort());
         model.addAttribute("movieAndAvgScore", movieAndAvgScore);
         return "rate";
     }

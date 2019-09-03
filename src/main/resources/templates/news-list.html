@@ -17,8 +17,8 @@
                 <!-- News post article-->
                 <div th:each="news:${newsPage.list}">
                     <article class="post post--news">
-                        <a class="post__image-link" href='news.html'>
-                            <img alt='' src="">
+                        <a class="post__image-link" href='/news'>
+                            <img alt='' src="/images/19.jpg">
                         </a>
 
                         <h1><a class="post__title-link" href="single-page-full.html" th:text="${news.title}"></a>

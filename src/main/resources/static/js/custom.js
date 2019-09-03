@@ -280,11 +280,16 @@ function init_BookingTwo() {
     "use strict";
     var price = $('#moviePrice').val();
     var sceneIdd = $('#sceneId').val();
+    var movieNames = $('#movieName').val();
+    var movieIddd = $('#movieId').val();
+    var bookSeated = $('#bookSeated').val();
     //form表单
     var numberTicket = $('.choosen-number'),//总票数
         sumTicket = $('.choosen-cost'),//总票价
         onePrice = $('.choosen-price'),//电影单价
         sceneId = $('.choosen-scene'),
+        movieName = $('.choosen-movieName'),
+        movieId = $('.choosen-movieId'),
         sits = $('.choosen-sits');//座位
 
     //1. Buttons for choose order method
@@ -324,6 +329,8 @@ function init_BookingTwo() {
         sumTicket.val(sum);
         onePrice.val(price);
         sceneId.val(sceneIdd);
+        movieName.val(movieNames);
+        movieId.val(movieIddd);
 
         //给座位赋值
         var chooseSits = '';
@@ -364,10 +371,15 @@ function init_MovieList() {
         e.preventDefault();
         var searchContent = $('.search__field').val().replace(/\s+/g, "");
         var selected = $('#search-sort').val();
+        if (searchContent == '') {
+            alert("查询内容不能为空！");
+        } else {
+            window.location.href = '/search/' + selected + '/' + searchContent;
+        }
+
         /*var data = {
             searchContent: searchContent,
         };*/
-        window.location.href = '/search/' + selected + '/' + searchContent;
 
     });
 
@@ -479,7 +491,7 @@ function remove(movieId) {
                 location.reload();
             },
             400: function () {
-                alert("失败");
+                alert("移除失败");
             }
         },
     });

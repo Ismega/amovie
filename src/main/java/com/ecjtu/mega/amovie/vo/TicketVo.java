@@ -14,4 +14,6 @@ public class TicketVo {
     private Integer num;
     private String sits;
     private Integer sceneId;
+    private String movieName;
+    private Integer movieId;
 }

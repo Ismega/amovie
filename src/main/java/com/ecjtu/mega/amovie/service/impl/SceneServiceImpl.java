@@ -6,6 +6,8 @@ import com.ecjtu.mega.amovie.service.SceneService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -34,11 +36,19 @@ public class SceneServiceImpl implements SceneService {
 
     @Override
     public int update(Scene scene) {
+        scene.setSeatNum(166 - scene.getSeatNum());
+//        Date t = new Date();
+//        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+//        scene.setShowtime( df.format(t));
         return repository.update(scene);
     }
 
     @Override
     public int save(Scene scene) {
+        scene.setSeatNum(166 - scene.getSeatNum());
+        Date t = new Date();
+        SimpleDateFormat df = new SimpleDateFormat("HH:mm");
+        scene.setShowtime(df.format(t));
         return repository.save(scene);
     }
 

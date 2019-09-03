@@ -51,5 +51,7 @@ public interface OrderService {
 
     Order findByBookedSeat(String bookedSeat);
 
+    List<Order> findByUserId(Integer userId);
+
 
 }

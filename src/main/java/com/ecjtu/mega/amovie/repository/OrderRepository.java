@@ -63,4 +63,7 @@ public interface OrderRepository {
     @Select("select * from `order` where seat=#{bookedSeat}")
     Order findByBookedSeat(String bookedSeat);
 
+    @Select("select * from `order` where user_id=#{userId}")
+    List<Order> findByUserId(Integer userId);
+
 }

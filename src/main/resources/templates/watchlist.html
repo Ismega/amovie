@@ -59,11 +59,6 @@
                     </div>
 
                     <div class="preview-footer">
-                        <div class="movie__rate">
-                            <div class="score" th:id="|score${movie.id}|"></div>
-                            <span class="movie__rate-number" th:text="|${movie.count}个评分|">170 </span>
-                            <span class="movie__rating" th:text="${movie.score}">5.0</span>
-                        </div>
                     </div>
                 </div>
 
@@ -95,19 +90,6 @@
 <script type="text/javascript">
     $(document).ready(function () {
         init_MovieList();
-    });
-</script>
-<script th:each="movieScore:${movieByUserIdList.list}" type="text/javascript">
-    "use strict";
-    $(document).ready(function () {
-        $('#score[[${movieScore.id}]]').raty({
-            width: 130,
-            score: [[${movieScore.score}]],
-            path: '/images/rate/',
-            starOff: 'star-off.svg',
-            starOn: 'star-on.svg',
-            readOnly: true
-        })
     });
 </script>
 </body>
