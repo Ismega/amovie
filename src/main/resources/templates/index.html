@@ -115,7 +115,7 @@
                         <img alt="" src="/images/6.jpg"/>
                     </div>
                     <p class="post__date" th:text="${#dates.format(news.getCreateTime(),'yyyy-mm-dd')}"></p>
-                    <a class="post__title" href="news.html" th:text="${news.getTitle()}"></a>
+                    <a class="post__title" href="/news" th:text="${news.getTitle()}"></a>
                     <a class="btn read-more post--btn" href="/newsList">了解更多</a>
                 </div>
             </div>

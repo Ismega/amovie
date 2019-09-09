@@ -25,7 +25,7 @@ public class IndexController {
     @Autowired
     private NewService newService;
 
-    @GetMapping("/")
+    @GetMapping({"/", "/index"})
     public String getAll(Model model,
                          @RequestParam(value = "page", required = false, defaultValue = "1") Integer page,
                          @RequestParam(value = "size", required = false, defaultValue = "6") Integer size) {

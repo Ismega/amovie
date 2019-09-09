@@ -14,7 +14,6 @@ public class SceneForm {
 
     private Integer movieId;
 
-    @NotBlank(message = "电影名不能为空")
     private String movieName;
 
     private Integer price;
